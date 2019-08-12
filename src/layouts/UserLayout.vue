@@ -5,11 +5,11 @@
         <div class="header">
           <a href="/">
             <img src="~@/assets/logo.svg" class="logo" alt="logo">
-            <span class="title">Ant Design</span>
+            <span class="title">保险申报系统</span>
           </a>
         </div>
         <div class="desc">
-          Ant Design 是西湖区最具影响力的 Web 设计规范
+          <!-- 保险申报系统用来做客户与保险公司的保险申报自动化对接 -->
         </div>
       </div>
 
@@ -22,7 +22,7 @@
           <a href="_self">条款</a>
         </div>
         <div class="copyright">
-          Copyright &copy; 2018 白鹭学园技术组出品
+          Copyright &copy; 2019 保险申报系统
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@ export default {
         text-align: center;
 
         .header {
-          height: 44px;
+          height: 50px;
           line-height: 44px;
 
           .badge {
@@ -94,12 +94,12 @@ export default {
           .logo {
             height: 44px;
             vertical-align: top;
-            margin-right: 16px;
+            margin-right: 10px;
             border-style: none;
           }
 
           .title {
-            font-size: 33px;
+            font-size: 40px;
             color: rgba(0, 0, 0, .85);
             font-family: Avenir, 'Helvetica Neue', Arial, Helvetica, sans-serif;
             font-weight: 600;

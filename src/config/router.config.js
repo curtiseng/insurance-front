@@ -22,7 +22,7 @@ export const asyncRouterMap = [
         path: '/admin/manager/:pageNo([1-9]\\d*)?',
         name: 'adminManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/list/TableList'),
+        component: () => import('@/views/admin/Manager'),
         meta: { title: '后勤管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
