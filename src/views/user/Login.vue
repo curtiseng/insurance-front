@@ -70,12 +70,12 @@
       </div>
       -->
     </a-form>
-    <two-step-captcha
+    <!-- <two-step-captcha
       v-if="requiredTwoStepCaptcha"
       :visible="stepCaptchaVisible"
       @success="stepCaptchaSuccess"
       @cancel="stepCaptchaCancel"
-    ></two-step-captcha>
+    ></two-step-captcha> -->
   </div>
 </template>
 
