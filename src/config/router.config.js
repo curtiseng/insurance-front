@@ -15,7 +15,7 @@ export const asyncRouterMap = [
       {
         path: '/dashboard/workplace',
         name: 'dashboard',
-        component: () => import('@/views/dashboard/Workplace'),
+        component: () => import('@/views/dashboard/Analysis'),
         meta: { title: '缴费统计', keepAlive: true, icon: bxAnaalyse, permission: [ 'user' ] }
       },
       {
