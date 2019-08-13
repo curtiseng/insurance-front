@@ -22,7 +22,7 @@
           </template>
         </a-table>
       </a-row>
-      <create-admin ref="createModal" @ok="handleOk" />
+      <create-admin ref="createModal" />
     </a-card>
   </div>
 </template>
@@ -45,24 +45,7 @@ const columns = [{
   dataIndex: 'operation',
   scopedSlots: { customRender: 'operation' }
 }]
-
-const data = [{
-  key: '1',
-  login: 'testzhang',
-  username: '张某',
-  email: '123456@qq.com'
-}, {
-  key: '2',
-  login: 'testwang',
-  username: '王某',
-  email: '123456@qq.com'
-}, {
-  key: '3',
-  login: 'testhe',
-  username: '何某',
-  email: '123456@qq.com'
-}]
-
+const data = []
 export default {
   components: {
     CreateAdmin
@@ -90,7 +73,7 @@ export default {
   methods: {
     queryAdmins () {
       getAdmins(this.queryParam).then(res => {
-        this.data = res.data
+        this.data = res
       })
     }
   }
