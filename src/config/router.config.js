@@ -35,7 +35,7 @@ export const asyncRouterMap = [
         path: '/client/manager',
         name: 'clientManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/list/TableList'),
+        component: () => import('@/views/client/Manager'),
         meta: { title: '客户管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
