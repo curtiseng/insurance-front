@@ -135,9 +135,9 @@ export default {
     loadData (pagination, filters, sorter) {
       this.localLoading = true
       const parameter = Object.assign({
-        pageNo: (pagination && pagination.current) ||
-          this.showPagination && this.localPagination.current || this.pageNum,
-        pageSize: (pagination && pagination.pageSize) ||
+        page: ((pagination && pagination.current) ||
+          this.showPagination && this.localPagination.current || this.pageNum) - 1,
+        size: (pagination && pagination.pageSize) ||
           this.showPagination && this.localPagination.pageSize || this.pageSize
       },
       (sorter && sorter.field && {

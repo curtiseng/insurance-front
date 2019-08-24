@@ -1,7 +1,7 @@
 import { axios } from '@/utils/request'
 
 const api = {
-  info: '/admin',
+  backend: '/admin/backend',
   list: '/admin'
 }
 
@@ -42,7 +42,7 @@ export function deleteAdmin (id) {
 // 获取用户列表 parameter: { pageSize: 10, pageNo: 1 }
 export function getAdmins (parameter) {
   return axios({
-    url: api.list,
+    url: api.backend,
     method: 'get',
     params: parameter
   })
