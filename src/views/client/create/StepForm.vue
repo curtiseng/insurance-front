@@ -1,9 +1,9 @@
 <template>
   <a-card :bordered="false">
     <a-steps class="steps" :current="currentTab">
-      <a-step title="填写转账信息" />
-      <a-step title="确认转账信息" />
-      <a-step title="完成" />
+      <a-step title="填写客户基本信息" />
+      <a-step title="填写预存金额" />
+      <a-step title="填写保险信息" />
     </a-steps>
     <div class="content">
       <step1 v-if="currentTab === 0" @nextStep="nextStep"/>

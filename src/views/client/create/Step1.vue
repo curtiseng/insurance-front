@@ -2,37 +2,70 @@
   <div>
     <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
       <a-form-item
-        label="付款账户"
+        label="公司名称"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-select
-          placeholder="ant-design@alipay.com"
-          v-decorator="['paymentUser', { rules: [{required: true, message: '付款账户必须填写'}] }]">
-          <a-select-option value="1">ant-design@alipay.com</a-select-option>
-        </a-select>
+        <a-input v-decorator="['login', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
       </a-form-item>
       <a-form-item
-        label="收款账户"
+        label="联系电话"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input-group
-          style="display: inline-block; vertical-align: middle"
-          :compact="true"
-        >
-          <a-select defaultValue="alipay" style="width: 100px">
-            <a-select-option value="alipay">支付宝</a-select-option>
-            <a-select-option value="wexinpay">微信</a-select-option>
-          </a-select>
-          <a-input
-            :style="{width: 'calc(100% - 100px)'}"
-            v-decorator="['payType', { initialValue: 'test@example.com', rules: [{required: true, message: '收款账户必须填写'}]}]"
-          />
-        </a-input-group>
+        <a-input v-decorator="['login', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
       </a-form-item>
       <a-form-item
-        label="收款人姓名"
+        label="客户首选邮箱"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="客户次选邮箱"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="首期保费"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="保险公司名称"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="保险公司首选邮箱"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="保险公司次选邮箱"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="项目经理"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+      </a-form-item>
+      <a-form-item
+        label="项目经理邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
@@ -46,7 +79,8 @@
         <a-input prefix="￥" v-decorator="['momey', { initialValue: '5000', rules: [{required: true, message: '转账金额必须填写'}] }]"/>
       </a-form-item>
       <a-form-item :wrapperCol="{span: 19, offset: 5}">
-        <a-button type="primary" @click="nextStep">下一步</a-button>
+        <a-button :loading="loading" type="primary" @click="nextStep">提交</a-button>
+        <a-button style="margin-left: 8px" type="primary" @click="nextStep">下一步</a-button>
       </a-form-item>
     </a-form>
     <a-divider />

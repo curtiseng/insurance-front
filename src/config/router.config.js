@@ -28,7 +28,7 @@ export const asyncRouterMap = [
       {
         path: '/clinet/create',
         name: 'create',
-        component: () => import('@/views/form/stepForm/StepForm'),
+        component: () => import('@/views/client/create/StepForm'),
         meta: { title: '客户新建', keepAlive: true, icon: 'form', permission: [ 'user' ] }
       },
       {
