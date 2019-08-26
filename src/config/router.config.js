@@ -19,7 +19,7 @@ export const asyncRouterMap = [
         meta: { title: '缴费统计', keepAlive: true, icon: bxAnaalyse, permission: [ 'user' ] }
       },
       {
-        path: '/admin/manager/:pageNo([1-9]\\d*)?',
+        path: '/admin/manager',
         name: 'adminManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/admin/Manager'),
@@ -44,6 +44,20 @@ export const asyncRouterMap = [
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/list/TableList'),
         meta: { title: '客户回收箱', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+      },
+      {
+        path: '/staff/manager/',
+        name: 'staffManager',
+        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+        component: () => import('@/views/staff/Manager'),
+        meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+      },
+      {
+        path: '/distribution/manager/',
+        name: 'distributionManager',
+        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+        component: () => import('@/views/distribution/Manager'),
+        meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       }
       // dashboard
       // {
