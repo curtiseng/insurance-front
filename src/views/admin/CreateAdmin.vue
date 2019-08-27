@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import { addBackendAdmin } from '@/api/admin'
 export default {
   data () {
     return {
@@ -70,11 +71,11 @@ export default {
       validateFields((errors, values) => {
         if (!errors) {
           console.log('values', values)
-          setTimeout(() => {
+          addBackendAdmin(values).then(res => {
             this.visible = false
             this.confirmLoading = false
-            this.$emit('ok', values)
-          }, 1500)
+            this.$emit('ok', res)
+          })
         } else {
           this.confirmLoading = false
         }

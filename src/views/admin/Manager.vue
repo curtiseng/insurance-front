@@ -9,19 +9,17 @@
         <s-table
           ref="table"
           size="default"
-          rowKey="key"
+          rowKey="(record) => record.data.id"
           :columns="columns"
           :data="loadData"
           showPagination="auto"
+          :rowSelection="options.rowSelection"
           bordered
         >
-          <template slot="name" slot-scope="text">
-            <a href="javascript:;">{{ text }}</a>
-          </template>
           <template slot="operation" slot-scope="text, record">
             <a-popconfirm
               title="确定删除吗?"
-              @confirm="() => onDelete(record.key)">
+              @confirm="() => onDelete(record.id)">
               <a href="javascript:;">删除</a>
             </a-popconfirm>
             <a-divider type="vertical"/>
@@ -34,7 +32,7 @@
   </div>
 </template>
 <script>
-import { getAdmins } from '@/api/admin'
+import { getBackendAdmins, deleteBackendAdmin } from '@/api/admin'
 import CreateAdmin from './CreateAdmin'
 import { STable } from '@/components'
 const columns = [{
@@ -63,16 +61,62 @@ export default {
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return getAdmins(Object.assign(parameter, this.queryParam))
+        return getBackendAdmins(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })
-      }
+      },
+      selectedRowKeys: [],
+      selectedRows: [],
+      options: {
+        rowSelection: {
+          selectedRowKeys: this.selectedRowKeys,
+          onChange: this.onSelectChange
+        }
+      },
+      optionAlertShow: false
     }
   },
+  created () {
+    this.tableOption()
+  },
   methods: {
+    tableOption () {
+      if (!this.optionAlertShow) {
+        this.options = {
+          alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
+          rowSelection: {
+            selectedRowKeys: this.selectedRowKeys,
+            onChange: this.onSelectChange,
+            getCheckboxProps: record => ({
+              props: {
+                disabled: record.no === 'No 2', // Column configuration not to be checked
+                name: record.no
+              }
+            })
+          }
+        }
+        this.optionAlertShow = true
+      } else {
+        this.options = {
+          alert: false,
+          rowSelection: null
+        }
+        this.optionAlertShow = false
+      }
+    },
     handleOk () {
       this.$refs.table.refresh()
+    },
+    onDelete (rowKey) {
+      console.log(rowKey)
+      deleteBackendAdmin(rowKey).then(res => {
+        this.$refs.table.refresh()
+      })
+    },
+    onSelectChange (selectedRowKeys, selectedRows) {
+      this.selectedRowKeys = selectedRowKeys
+      this.selectedRows = selectedRows
     }
   }
 }
