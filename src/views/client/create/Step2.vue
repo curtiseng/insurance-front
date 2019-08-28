@@ -1,110 +1,108 @@
 <template>
   <div>
-    <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
-      <a-alert
-        :closable="true"
-        message="此金额为客户备用金，此后可以在客户管理里增加备用金"
-        style="margin-bottom: 24px;"
-      />
-      <a-form-item
-        label="公司名称"
-        :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
-        class="stepFormText"
-      >
-        ant-design@alipay.com
-      </a-form-item>
-      <a-form-item
-        label="公司首选邮箱"
-        :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
-        class="stepFormText"
-      >
-        test@example.com
-      </a-form-item>
-      <a-form-item
-        label="保险公司名称"
-        :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
-        class="stepFormText"
-      >
-        Alex
-      </a-form-item>
-      <a-form-item
-        label="保险公司邮箱"
-        :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
-        class="stepFormText"
-      >
-        ￥ 5,000.00
-      </a-form-item>
-      <a-divider />
-      <a-form-item
-        label="预存金额"
-        :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
-        class="stepFormText"
-      >
-        <a-input
-          type="password"
-          style="width: 80%;"
-          v-decorator="['paymentPassword', { initialValue: '123456', rules: [{required: true, message: '请输入支付密码'}] }]" />
-      </a-form-item>
-      <a-form-item :wrapperCol="{span: 19, offset: 5}">
-        <a-button :loading="loading" type="primary" @click="nextStep">提交</a-button>
-        <a-button style="margin-left: 8px" @click="prevStep">上一步</a-button>
-      </a-form-item>
-    </a-form>
+    <a-spin :spinning="confirmLoading">
+      <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
+        <a-form-item
+          label="登陆名"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['login', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="姓名"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['username', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="密码"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['password', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="邮箱"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item :wrapperCol="{span: 19, offset: 5}">
+          <a-button :loading="loading" type="primary" @click="nextStep">提交</a-button>
+          <a-button style="margin-left: 8px" @click="prevStep">上一步</a-button>
+        </a-form-item>
+      </a-form>
+    </a-spin>
+    <a-divider />
+    <div class="step-form-style-desc">
+      <h3>说明</h3>
+      <h4>点击下一步和提交</h4>
+      <p>点击下一步默认会提交</p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Step2',
+  name: 'Step1',
   data () {
     return {
-      labelCol: { lg: { span: 5 }, sm: { span: 5 } },
-      wrapperCol: { lg: { span: 19 }, sm: { span: 19 } },
-      form: this.$form.createForm(this),
-      loading: false,
-      timer: 0
+      labelCol: {
+        xs: { span: 24 },
+        sm: { span: 7 }
+      },
+      wrapperCol: {
+        xs: { span: 24 },
+        sm: { span: 13 }
+      },
+      visible: false,
+      confirmLoading: false,
+      form: this.$form.createForm(this)
     }
   },
   methods: {
     nextStep () {
-      const that = this
       const { form: { validateFields } } = this
-      that.loading = true
+      // 先校验，通过表单校验后，才进入下一步
       validateFields((err, values) => {
         if (!err) {
-          console.log('表单 values', values)
-          that.timer = setTimeout(function () {
-            that.loading = false
-            that.$emit('nextStep')
-          }, 1500)
-        } else {
-          that.loading = false
+          this.$emit('nextStep')
         }
       })
     },
     prevStep () {
       this.$emit('prevStep')
     }
-  },
-  beforeDestroy () {
-    clearTimeout(this.timer)
   }
 }
 </script>
 
 <style lang="less" scoped>
-  .stepFormText {
-    margin-bottom: 24px;
+.step-form-style-desc {
+  padding: 0 56px;
+  color: rgba(0,0,0,.45);
 
-    .ant-form-item-label,
-    .ant-form-item-control {
-      line-height: 22px;
-    }
+  h3 {
+    margin: 0 0 12px;
+    color: rgba(0,0,0,.45);
+    font-size: 16px;
+    line-height: 32px;
   }
 
+  h4 {
+    margin: 0 0 4px;
+    color: rgba(0,0,0,.45);
+    font-size: 14px;
+    line-height: 22px;
+  }
+
+  p {
+    margin-top: 0;
+    margin-bottom: 12px;
+    line-height: 22px;
+  }
+}
 </style>

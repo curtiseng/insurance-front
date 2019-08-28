@@ -9,11 +9,10 @@
         <s-table
           ref="table"
           size="default"
-          rowKey="(record) => record.data.id"
+          rowKey="id"
           :columns="columns"
           :data="loadData"
           showPagination="auto"
-          :rowSelection="options.rowSelection"
           bordered
         >
           <template slot="operation" slot-scope="text, record">
@@ -22,8 +21,10 @@
               @confirm="() => onDelete(record.id)">
               <a href="javascript:;">删除</a>
             </a-popconfirm>
+            <!--
             <a-divider type="vertical"/>
-            <a href="javascript:;">更新</a>
+            <a @click="handleEdit(record)">更新</a>
+            -->
           </template>
         </s-table>
       </a-row>
@@ -65,46 +66,10 @@ export default {
           .then(res => {
             return res
           })
-      },
-      selectedRowKeys: [],
-      selectedRows: [],
-      options: {
-        rowSelection: {
-          selectedRowKeys: this.selectedRowKeys,
-          onChange: this.onSelectChange
-        }
-      },
-      optionAlertShow: false
+      }
     }
   },
-  created () {
-    this.tableOption()
-  },
   methods: {
-    tableOption () {
-      if (!this.optionAlertShow) {
-        this.options = {
-          alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
-          rowSelection: {
-            selectedRowKeys: this.selectedRowKeys,
-            onChange: this.onSelectChange,
-            getCheckboxProps: record => ({
-              props: {
-                disabled: record.no === 'No 2', // Column configuration not to be checked
-                name: record.no
-              }
-            })
-          }
-        }
-        this.optionAlertShow = true
-      } else {
-        this.options = {
-          alert: false,
-          rowSelection: null
-        }
-        this.optionAlertShow = false
-      }
-    },
     handleOk () {
       this.$refs.table.refresh()
     },

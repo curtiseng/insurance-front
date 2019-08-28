@@ -31,13 +31,13 @@
           </template>
         </s-table>
       </a-row>
-      <create-admin ref="createModal" @ok="handleOk"/>
+      <create-staff ref="createModal" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
 <script>
 import { getAdmins } from '@/api/admin'
-import CreateAdmin from './CreateAdmin'
+import CreateStaff from './CreateStaff'
 import { STable } from '@/components'
 const columns = [{
   title: '登录名',
@@ -55,7 +55,7 @@ const columns = [{
 }]
 export default {
   components: {
-    CreateAdmin,
+    CreateStaff,
     STable
   },
   data () {

@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建规则"
+    title="新建管理员"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -75,6 +75,9 @@ export default {
             this.visible = false
             this.confirmLoading = false
             this.$emit('ok', res)
+          }).catch(error => {
+            console.log(error)
+            this.confirmLoading = false
           })
         } else {
           this.confirmLoading = false

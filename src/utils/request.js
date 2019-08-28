@@ -13,18 +13,25 @@ const service = axios.create({
 
 const err = (error) => {
   if (error.response) {
+    console.log(error.response)
     const data = error.response.data
     const token = Vue.ls.get(ACCESS_TOKEN)
     if (error.response.status === 403) {
       notification.error({
-        message: 'Forbidden',
+        message: '权限受限',
+        description: '请重新登录或联系管理员'
+      })
+    }
+    if (error.response.status === 400) {
+      notification.error({
+        message: '错误数据',
         description: data.message
       })
     }
     if (error.response.status === 401 && !(data.result && data.result.isLogin)) {
       notification.error({
-        message: 'Unauthorized',
-        description: 'Authorization verification failed'
+        message: '未登录',
+        description: '账号或密码错误，请重新登录'
       })
       if (token) {
         store.dispatch('Logout').then(() => {

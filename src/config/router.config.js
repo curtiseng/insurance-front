@@ -49,7 +49,7 @@ export const asyncRouterMap = [
         path: '/staff/manager/',
         name: 'staffManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/staff/Manager'),
+        component: () => import('@/views/staff/StaffManager'),
         meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
