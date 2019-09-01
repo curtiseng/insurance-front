@@ -22,8 +22,15 @@ export const asyncRouterMap = [
         path: '/admin/manager',
         name: 'adminManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/admin/Manager'),
-        meta: { title: '后勤管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        component: () => import('@/views/admin/AdminManager'),
+        meta: { title: '后勤管理员', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+      },
+      {
+        path: '/cadmin/manager',
+        name: 'cadminManager',
+        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+        component: () => import('@/views/cadmin/AdminManager'),
+        meta: { title: '客户管理员', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
         path: '/clinet/create',
@@ -35,7 +42,7 @@ export const asyncRouterMap = [
         path: '/client/manager',
         name: 'clientManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/client/Manager'),
+        component: () => import('@/views/client/ClientManager'),
         meta: { title: '客户管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {

@@ -2,33 +2,40 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
+        <a-button type="primary" icon="plus" @click="addClient">新建</a-button>
       </a-row>
       <br/>
       <a-row>
-        <a-table :columns="columns" :dataSource="data" bordered :pagination="pagination">
-          <template slot="name" slot-scope="text">
-            <a href="javascript:;">{{ text }}</a>
-          </template>
+        <s-table
+          ref="table"
+          size="default"
+          rowKey="id"
+          :columns="columns"
+          :data="loadData"
+          showPagination="auto"
+          bordered
+        >
           <template slot="operation" slot-scope="text, record">
             <a-popconfirm
-              v-if="data.length"
               title="确定删除吗?"
-              @confirm="() => onDelete(record.key)">
+              @confirm="() => onDelete(record.id)">
               <a href="javascript:;">删除</a>
             </a-popconfirm>
             <a-divider type="vertical"/>
             <a href="javascript:;">更新</a>
+            <a-divider type="vertical"/>
+            <a href="javascript:;">添加保险</a>
+            <a-divider type="vertical"/>
+            <a href="javascript:;">增加余额</a>
           </template>
-        </a-table>
+        </s-table>
       </a-row>
-      <create-client ref="createModal" />
     </a-card>
   </div>
 </template>
 <script>
-import { getClients, addClient } from '@/api/client'
-import CreateClient from './CreateClient'
+import { getClients, deleteClient } from '@/api/client'
+import { STable } from '@/components'
 const columns = [{
   title: '公司名称',
   dataIndex: 'name'
@@ -68,36 +75,38 @@ const columns = [{
   dataIndex: 'operation',
   scopedSlots: { customRender: 'operation' }
 }]
-const data = []
 export default {
   components: {
-    CreateClient
+    STable
   },
   data () {
     return {
-      data,
       columns,
-      pagination: {
-        pageSize: 20, // 默认每页显示数量
-        showSizeChanger: true, // 显示可改变每页数量
-        pageSizeOptions: ['10', '20', '30', '40'], // 每页数量选项
-        showTotal: total => `共有${total} 项` // 显示总数
-        // showSizeChange: (current, pageSize) => this.pageSize = pageSize // 改变每页数量时更新显示
-      },
       queryParam: {
-        pageSize: 10,
-        pageNo: 1
+      },
+      loadData: parameter => {
+        console.log('loadData.parameter', parameter)
+        return getClients(Object.assign(parameter, this.queryParam))
+          .then(res => {
+            return res
+          })
       }
     }
   },
-  created () {
-    this.queryClients()
-  },
   methods: {
-    queryClients () {
-      getClients(this.queryParam).then(res => {
-        this.data = res
+    onDelete (rowKey) {
+      console.log(rowKey)
+      deleteClient(rowKey).then(res => {
+        this.$refs.table.refresh()
       })
+    },
+    addClient () {
+      this.$router.push({
+        path: `/clinet/create`
+      })
+    },
+    handleOk () {
+      this.$refs.table.refresh()
     }
   }
 }

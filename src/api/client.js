@@ -21,3 +21,11 @@ export function addClient (parameter) {
     data: parameter
   })
 }
+
+// 删除客户
+export function deleteClient (parameter) {
+  return axios({
+    url: `${api.client}/${parameter}`,
+    method: 'delete'
+  })
+}

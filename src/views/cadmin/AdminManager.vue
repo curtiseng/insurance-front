@@ -2,10 +2,6 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
-      </a-row>
-      <br/>
-      <a-row>
         <s-table
           ref="table"
           size="default"
@@ -21,20 +17,14 @@
               @confirm="() => onDelete(record.id)">
               <a href="javascript:;">删除</a>
             </a-popconfirm>
-            <!--
-            <a-divider type="vertical"/>
-            <a @click="handleEdit(record)">更新</a>
-            -->
           </template>
         </s-table>
       </a-row>
-      <create-admin ref="createModal" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
 <script>
-import { getBackendAdmins, deleteBackendAdmin } from '@/api/admin'
-import CreateAdmin from './CreateAdmin'
+import { getCompanyAdmins, deleteCompanyAdmin } from '@/api/cadmin'
 import { STable } from '@/components'
 const columns = [{
   title: '登录名',
@@ -52,7 +42,6 @@ const columns = [{
 }]
 export default {
   components: {
-    CreateAdmin,
     STable
   },
   data () {
@@ -62,7 +51,7 @@ export default {
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return getBackendAdmins(Object.assign(parameter, this.queryParam))
+        return getCompanyAdmins(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })
@@ -75,13 +64,9 @@ export default {
     },
     onDelete (rowKey) {
       console.log(rowKey)
-      deleteBackendAdmin(rowKey).then(res => {
+      deleteCompanyAdmin(rowKey).then(res => {
         this.$refs.table.refresh()
       })
-    },
-    onSelectChange (selectedRowKeys, selectedRows) {
-      this.selectedRowKeys = selectedRowKeys
-      this.selectedRows = selectedRows
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建规则"
+    title="新建管理员"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -14,7 +14,7 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['login', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['login', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
         </a-form-item>
         <a-form-item
           label="姓名"
@@ -37,12 +37,20 @@
         >
           <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
         </a-form-item>
+        <a-form-item
+          label="客户"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
       </a-form>
     </a-spin>
   </a-modal>
 </template>
 
 <script>
+import { addBackendAdmin } from '@/api/admin'
 export default {
   data () {
     return {
@@ -70,11 +78,14 @@ export default {
       validateFields((errors, values) => {
         if (!errors) {
           console.log('values', values)
-          setTimeout(() => {
+          addBackendAdmin(values).then(res => {
             this.visible = false
             this.confirmLoading = false
-            this.$emit('ok', values)
-          }, 1500)
+            this.$emit('ok', res)
+          }).catch(error => {
+            console.log(error)
+            this.confirmLoading = false
+          })
         } else {
           this.confirmLoading = false
         }

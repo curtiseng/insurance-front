@@ -1,25 +1,7 @@
 import { axios } from '@/utils/request'
 
 const api = {
-  backend: '/admin/backend',
-  list: '/admin'
-}
-
-// 根据用户 id 获取用户信息
-export function getAdmin (id) {
-  return axios({
-    url: `${api.user}/${id}`,
-    method: 'get'
-  })
-}
-
-// 增加用户
-export function addAdmin (parameter) {
-  return axios({
-    url: api.user,
-    method: 'post',
-    data: parameter
-  })
+  backend: '/admin/backend'
 }
 
 // 更新用户 // or (id, parameter)
