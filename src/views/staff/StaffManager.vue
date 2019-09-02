@@ -3,13 +3,14 @@
     <a-card :bordered="false">
       <a-row>
         <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
+        <a-button style="margin-left: 8px" type="primary" @click="$refs.createModal.add()">导入员工</a-button>
       </a-row>
       <br/>
       <a-row>
         <s-table
           ref="table"
           size="default"
-          rowKey="key"
+          rowKey="id"
           :columns="columns"
           :data="loadData"
           showPagination="auto"
@@ -28,6 +29,8 @@
             </a-popconfirm>
             <a-divider type="vertical"/>
             <a href="javascript:;">更新</a>
+            <a-divider type="vertical"/>
+            <a href="javascript:;">离职</a>
           </template>
         </s-table>
       </a-row>
@@ -36,18 +39,30 @@
   </div>
 </template>
 <script>
-import { getAdmins } from '@/api/admin'
+import { getStaff } from '@/api/staff'
 import CreateStaff from './CreateStaff'
 import { STable } from '@/components'
 const columns = [{
-  title: '登录名',
-  dataIndex: 'login'
+  title: '姓名',
+  dataIndex: 'name'
 }, {
-  title: '昵称',
-  dataIndex: 'username'
+  title: '身份证号',
+  dataIndex: 'idCard'
 }, {
-  title: '邮箱',
-  dataIndex: 'email'
+  title: '性别',
+  dataIndex: 'sex'
+}, {
+  title: '岗位',
+  dataIndex: 'jobs'
+}, {
+  title: '保险类型',
+  dataIndex: 'insuranceType'
+}, {
+  title: '开始投保日期',
+  dataIndex: 'startTime'
+}, {
+  title: '人员类型',
+  dataIndex: 'staffType'
 }, {
   title: '操作',
   dataIndex: 'operation',
@@ -65,7 +80,7 @@ export default {
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return getAdmins(Object.assign(parameter, this.queryParam))
+        return getStaff(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })

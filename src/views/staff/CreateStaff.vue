@@ -10,32 +10,53 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item
-          label="登陆名"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['login', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
-        </a-form-item>
-        <a-form-item
           label="姓名"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['username', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['name', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
         </a-form-item>
         <a-form-item
-          label="密码"
+          label="身份证号"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['password', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['idCard', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
         </a-form-item>
         <a-form-item
-          label="邮箱"
+          label="性别"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['sex', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="岗位"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['jobs', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="保险类型"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['insuranceType', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="开始投保日期"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['startTime', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="人员类型"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['staffType', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
         </a-form-item>
       </a-form>
     </a-spin>
