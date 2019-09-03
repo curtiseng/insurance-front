@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-button type="primary" icon="plus" @click="addClient">新建</a-button>
+        <a-button type="primary" icon="plus" @click="addClient(values)">新建</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -22,11 +22,16 @@
               <a href="javascript:;">删除</a>
             </a-popconfirm>
             <a-divider type="vertical"/>
-            <a href="javascript:;">更新</a>
+            <a @click="onUpdate(record.id)" href="javascript:;">更新</a>
             <a-divider type="vertical"/>
-            <a href="javascript:;">添加保险</a>
-            <a-divider type="vertical"/>
-            <a href="javascript:;">增加余额</a>
+            <a-dropdown>
+              <a-menu slot="overlay" @click="menuClick">
+                <a-menu-item :key="1"><a>导入员工</a></a-menu-item>
+                <a-menu-item :key="2"><a>修改密码</a></a-menu-item>
+                <a-menu-item :key="3"><a>增加余额</a></a-menu-item>
+              </a-menu>
+              <a>更多<a-icon type="down"/></a>
+            </a-dropdown>
           </template>
         </s-table>
       </a-row>
@@ -99,6 +104,15 @@ export default {
       deleteClient(rowKey).then(res => {
         this.$refs.table.refresh()
       })
+    },
+    onUpdate (rowKey) {
+      console.log('----------' + rowKey)
+    },
+    menuClick (values) {
+      console.log('----------' + values.item)
+      console.log('----------' + values.key)
+      console.log('----------' + values.keyPath)
+      console.log('----------' + values.domEvent)
     },
     addClient () {
       this.$router.push({

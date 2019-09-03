@@ -14,49 +14,53 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['name', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['name', {rules: [{required: true, whitespace:true, message: '相对人名称不能为空'}, {max: 10, message: '最多10个字符'}]}]" />
         </a-form-item>
         <a-form-item
           label="身份证号"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['idCard', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['idCard', {rules: [{required: true, whitespace:true, message: '身份证不能为空'}, {pattern: /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/, message: '身份证格式不对'}]}]" />
         </a-form-item>
         <a-form-item
           label="性别"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
+          :required="false"
         >
-          <a-input v-decorator="['sex', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-select defaultValue="男">
+            <a-select-option value="男">男</a-select-option>
+            <a-select-option value="女">女</a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item
           label="岗位"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['jobs', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['jobs', {rules: []}]" />
         </a-form-item>
         <a-form-item
           label="保险类型"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['insuranceType', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['insuranceType', {rules: []}]" />
         </a-form-item>
         <a-form-item
           label="开始投保日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['startTime', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-date-picker @change="onChange" />
         </a-form-item>
         <a-form-item
           label="人员类型"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['staffType', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['staffType', {rules: []}]" />
         </a-form-item>
       </a-form>
     </a-spin>
@@ -64,6 +68,7 @@
 </template>
 
 <script>
+import { addStaff } from '@/api/staff'
 export default {
   data () {
     return {
@@ -91,11 +96,14 @@ export default {
       validateFields((errors, values) => {
         if (!errors) {
           console.log('values', values)
-          setTimeout(() => {
+          addStaff(values).then(res => {
             this.visible = false
             this.confirmLoading = false
-            this.$emit('ok', values)
-          }, 1500)
+            this.$emit('ok', res)
+          }).catch(error => {
+            console.log(error)
+            this.confirmLoading = false
+          })
         } else {
           this.confirmLoading = false
         }
@@ -103,6 +111,9 @@ export default {
     },
     handleCancel () {
       this.visible = false
+    },
+    onChange (date, dateString) {
+      console.log(date, dateString)
     }
   }
 }

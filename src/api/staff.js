@@ -39,7 +39,7 @@ export function addStaff (parameter) {
   })
 }
 
-// 没有client参数增加用户
+// 有client参数增加用户,供管理员使用
 export function addStaffWithClient (parameter) {
   return axios({
     url: api.staff,

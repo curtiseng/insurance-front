@@ -31,13 +31,13 @@
           </template>
         </s-table>
       </a-row>
-      <create-admin ref="createModal" @ok="handleOk"/>
+      <create-distribution ref="createModal" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
 <script>
-import { getAdmins } from '@/api/admin'
-import CreateAdmin from './CreateAdmin'
+import { getBackendAdmins } from '@/api/admin'
+import CreateDistribution from './CreateDistribution'
 import { STable } from '@/components'
 const columns = [{
   title: '登录名',
@@ -55,7 +55,7 @@ const columns = [{
 }]
 export default {
   components: {
-    CreateAdmin,
+    CreateDistribution,
     STable
   },
   data () {
@@ -65,7 +65,7 @@ export default {
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return getAdmins(Object.assign(parameter, this.queryParam))
+        return getBackendAdmins(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })

@@ -26,13 +26,6 @@ export const asyncRouterMap = [
         meta: { title: '后勤管理员', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
-        path: '/cadmin/manager',
-        name: 'cadminManager',
-        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/cadmin/AdminManager'),
-        meta: { title: '客户管理员', keepAlive: true, icon: 'table', permission: [ 'user' ] }
-      },
-      {
         path: '/clinet/create',
         name: 'create',
         component: () => import('@/views/client/create/StepForm'),
@@ -46,11 +39,18 @@ export const asyncRouterMap = [
         meta: { title: '客户管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
-        path: '/client/recycling',
-        name: 'recycling',
+        path: '/client/insurance',
+        name: 'insuranceManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/list/TableList'),
-        meta: { title: '客户回收箱', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        component: () => import('@/views/insurance/InsuranceManager'),
+        meta: { title: '保险管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+      },
+      {
+        path: '/client/update',
+        name: 'updateClient',
+        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+        component: () => import('@/views/client/UpdateClient'),
+        meta: { title: '信息修改', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       },
       {
         path: '/staff/manager/',
@@ -63,7 +63,7 @@ export const asyncRouterMap = [
         path: '/distribution/manager/',
         name: 'distributionManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/distribution/Manager'),
+        component: () => import('@/views/distribution/DistributionManager'),
         meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
       }
       // dashboard

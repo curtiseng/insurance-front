@@ -37,13 +37,6 @@
         >
           <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
         </a-form-item>
-        <a-form-item
-          label="客户"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
-        </a-form-item>
       </a-form>
     </a-spin>
   </a-modal>

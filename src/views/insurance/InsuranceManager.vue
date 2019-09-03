@@ -2,6 +2,10 @@
   <div>
     <a-card :bordered="false">
       <a-row>
+        <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
+      </a-row>
+      <br/>
+      <a-row>
         <s-table
           ref="table"
           size="default"
@@ -20,11 +24,13 @@
           </template>
         </s-table>
       </a-row>
+      <create-insuracne ref="createModal" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
 <script>
-import { getCompanyAdmins, deleteCompanyAdmin } from '@/api/cadmin'
+import { getBackendAdmins, deleteBackendAdmin } from '@/api/admin'
+import CreateInsurance from './CreateInsurance'
 import { STable } from '@/components'
 const columns = [{
   title: '登录名',
@@ -42,6 +48,7 @@ const columns = [{
 }]
 export default {
   components: {
+    CreateInsurance,
     STable
   },
   data () {
@@ -51,7 +58,7 @@ export default {
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return getCompanyAdmins(Object.assign(parameter, this.queryParam))
+        return getBackendAdmins(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })
@@ -64,7 +71,7 @@ export default {
     },
     onDelete (rowKey) {
       console.log(rowKey)
-      deleteCompanyAdmin(rowKey).then(res => {
+      deleteBackendAdmin(rowKey).then(res => {
         this.$refs.table.refresh()
       })
     }
