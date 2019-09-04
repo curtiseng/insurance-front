@@ -16,55 +16,55 @@ export const asyncRouterMap = [
         path: '/dashboard/workplace',
         name: 'dashboard',
         component: () => import('@/views/dashboard/Analysis'),
-        meta: { title: '缴费统计', keepAlive: true, icon: bxAnaalyse, permission: [ 'user' ] }
+        meta: { title: '缴费统计', keepAlive: true, icon: bxAnaalyse, permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/admin/manager',
         name: 'adminManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/admin/AdminManager'),
-        meta: { title: '后勤管理员', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        meta: { title: '后勤管理员', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/clinet/create',
         name: 'create',
         component: () => import('@/views/client/create/StepForm'),
-        meta: { title: '客户新建', keepAlive: true, icon: 'form', permission: [ 'user' ] }
+        meta: { title: '客户新建', keepAlive: true, icon: 'form', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/client/manager',
         name: 'clientManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/client/ClientManager'),
-        meta: { title: '客户管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        meta: { title: '客户管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/client/insurance',
         name: 'insuranceManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/insurance/InsuranceManager'),
-        meta: { title: '保险管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        meta: { title: '保险管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/client/update',
         name: 'updateClient',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/client/UpdateClient'),
-        meta: { title: '信息修改', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        meta: { title: '信息修改', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/staff/manager/',
         name: 'staffManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/staff/StaffManager'),
-        meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/distribution/manager/',
         name: 'distributionManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/distribution/DistributionManager'),
-        meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'user' ] }
+        meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       }
       // dashboard
       // {
