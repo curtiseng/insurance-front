@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建管理员"
+    title="新建保险"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -10,32 +10,64 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item
-          label="登陆名"
+          label="保险险种"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['login', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['name', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="姓名"
+          label="保险唯一识别码"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['username', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['code', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="密码"
+          label="保险开始日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['password', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-date-picker @change="onBeginChange" />
         </a-form-item>
         <a-form-item
-          label="邮箱"
+          label="保险结束日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-date-picker @change="onEndChange" />
+        </a-form-item>
+        <a-form-item
+          label="保险金额"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['balance', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="保险结算方式"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+          :required="false"
+        >
+          <a-select defaultValue="MOUTH">
+            <a-select-option value="MOUTH">按月计费</a-select-option>
+            <a-select-option value="DAY">按天计费</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item
+          label="货物保险费率"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['insuranceRate', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="保单号"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['insuranceNumber', {rules: [{required: true}]}]" />
         </a-form-item>
       </a-form>
     </a-spin>
@@ -43,7 +75,7 @@
 </template>
 
 <script>
-import { addBackendAdmin } from '@/api/admin'
+import { addInsurance } from '@/api/insurance'
 export default {
   data () {
     return {
@@ -57,21 +89,32 @@ export default {
       },
       visible: false,
       confirmLoading: false,
-
+      clientId: '0',
       form: this.$form.createForm(this)
     }
   },
   methods: {
-    add () {
+    add (clientId) {
+      console.log(clientId)
       this.visible = true
+        if (clientId === '0') {
+          this.$notification['error']({
+          message: '错误',
+          description: '请先选择客户',
+          duration: 4
+        })
+        this.visible = false
+      }
+      this.clientId = clientId
     },
     handleSubmit () {
       const { form: { validateFields } } = this
       this.confirmLoading = true
       validateFields((errors, values) => {
         if (!errors) {
+          values.clientId = this.clientId
           console.log('values', values)
-          addBackendAdmin(values).then(res => {
+          addInsurance(values).then(res => {
             this.visible = false
             this.confirmLoading = false
             this.$emit('ok', res)
@@ -86,6 +129,12 @@ export default {
     },
     handleCancel () {
       this.visible = false
+    },
+    onBeginChange (date, dateString) {
+      console.log(date, dateString)
+    },
+    onEndChange (date, dateString) {
+      console.log(date, dateString)
     }
   }
 }

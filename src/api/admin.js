@@ -49,3 +49,11 @@ export function addCompanyAdmin (parameter, client) {
     params: client
   })
 }
+
+export function changeCompanyPassword (parameter) {
+  return axios({
+    url: '/admin/company/password',
+    method: 'post',
+    data: parameter
+  })
+}

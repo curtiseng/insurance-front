@@ -4,6 +4,7 @@
       <a-row>
         <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
         <a-button style="margin-left: 8px" type="primary" @click="$refs.createModal.add()">导入员工</a-button>
+        <a-button style="margin-left: 8px" type="primary" @click="$refs.createModal.add()">下载模板</a-button>
       </a-row>
       <br/>
       <a-row>

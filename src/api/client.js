@@ -2,6 +2,7 @@ import { axios } from '@/utils/request'
 
 const api = {
   client: '/client',
+  allClient: '/client/all',
   clientBalance: '/client/balance'
 }
 
@@ -11,6 +12,13 @@ export function getClients (parameter) {
     url: api.client,
     method: 'get',
     params: parameter
+  })
+}
+
+export function getAllClients () {
+  return axios({
+    url: api.allClient,
+    method: 'get'
   })
 }
 

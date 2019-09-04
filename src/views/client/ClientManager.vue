@@ -2,7 +2,8 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-button type="primary" icon="plus" @click="addClient(values)">新建</a-button>
+        <a-button type="primary" icon="plus" @click="addClient()">新建</a-button>
+        <a-button type="primary" icon="download" style="margin-left: 8px" @click="addClient()">下载导入模板</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -24,13 +25,14 @@
             <a-divider type="vertical"/>
             <a @click="importStaff(record.id)" href="javascript:;">导入员工</a>
             <a-divider type="vertical"/>
-            <a @click="changePassword(record.id)" href="javascript:;">修改密码</a>
+            <a @click="$refs.changePassword.add(record.id)" href="javascript:;">修改密码</a>
             <a-divider type="vertical"/>
             <a @click="$refs.addBalance.add(record.id)" href="javascript:;">增加余额</a>
           </template>
         </s-table>
       </a-row>
       <add-balance ref="addBalance" @ok="handleOk"/>
+      <change-password ref="changePassword" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
@@ -38,6 +40,7 @@
 import { getClients, deleteClient } from '@/api/client'
 import { STable } from '@/components'
 import AddBalance from './AddBalance'
+import ChangePassword from './ChangePassword'
 const columns = [{
   title: '公司名称',
   dataIndex: 'name'
@@ -80,7 +83,8 @@ const columns = [{
 export default {
   components: {
     STable,
-    AddBalance
+    AddBalance,
+    ChangePassword
   },
   data () {
     return {
@@ -110,9 +114,6 @@ export default {
     },
     handleOk () {
       this.$refs.table.refresh()
-    },
-    addBalance (rowKey) {
-
     }
   }
 }
