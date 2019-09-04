@@ -1,7 +1,8 @@
 import { axios } from '@/utils/request'
 
 const api = {
-  backend: '/admin/backend'
+  backend: '/admin/backend',
+  company: '/admin/company'
 }
 
 // 更新用户 // or (id, parameter)
@@ -36,5 +37,15 @@ export function addBackendAdmin (parameter) {
     url: api.backend,
     method: 'post',
     data: parameter
+  })
+}
+
+// 增加用户
+export function addCompanyAdmin (parameter, client) {
+  return axios({
+    url: api.company,
+    method: 'post',
+    data: parameter,
+    params: client
   })
 }

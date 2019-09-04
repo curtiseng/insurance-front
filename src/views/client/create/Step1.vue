@@ -6,113 +6,131 @@
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['login', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        <a-input v-decorator="['name', {rules: [{required: true}]}]" />
       </a-form-item>
       <a-form-item
         label="联系电话"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['login', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+        <a-input v-decorator="['phoneNumber', {rules: [{required: true}]}]" />
       </a-form-item>
       <a-form-item
         label="客户首选邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['firstClientEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="客户次选邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['secondClientEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="首期保费"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input prefix="￥" v-decorator="['initialMoney', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="保险公司名称"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['insuranceName', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="保险公司首选邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['firstInsuranceEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="保险公司次选邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['secondInsuranceEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="项目经理"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['leader', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="项目经理邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['name', { initialValue: 'Alex', rules: [{required: true, message: '收款人名称必须核对'}] }]"/>
+        <a-input v-decorator="['leaderEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
-        label="转账金额"
+        label="项目经理邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input prefix="￥" v-decorator="['momey', { initialValue: '5000', rules: [{required: true, message: '转账金额必须填写'}] }]"/>
+        <a-input v-decorator="['commonEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item :wrapperCol="{span: 19, offset: 5}">
-        <a-button :loading="loading" type="primary" @click="nextStep">提交</a-button>
-        <a-button style="margin-left: 8px" type="primary" @click="nextStep">下一步</a-button>
+        <a-button :loading="loading" type="primary" :disabled="handSubmitDisabled" @click="handleSubmit">提交</a-button>
+        <a-button style="margin-left: 8px" type="primary" :disabled="handDisabled" @click="nextStep">下一步</a-button>
       </a-form-item>
     </a-form>
     <a-divider />
     <div class="step-form-style-desc">
       <h3>说明</h3>
-      <h4>转账到支付宝账户</h4>
-      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
-      <h4>转账到银行卡</h4>
+      <h4>初始金额</h4>
       <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
     </div>
   </div>
 </template>
 
 <script>
+import { addClient } from '@/api/client'
 export default {
   name: 'Step1',
   data () {
     return {
       labelCol: { lg: { span: 5 }, sm: { span: 5 } },
       wrapperCol: { lg: { span: 19 }, sm: { span: 19 } },
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      handDisabled: true,
+      handSubmitDisabled: false,
+      loading: false
     }
   },
   methods: {
-    nextStep () {
+    handleSubmit () {
       const { form: { validateFields } } = this
-      // 先校验，通过表单校验后，才进入下一步
       validateFields((err, values) => {
         if (!err) {
-          this.$emit('nextStep')
+          this.loading = true
+          addClient(values).then(res => {
+            console.log(res.id)
+            sessionStorage.setItem('clientId', res.id)
+            this.loading = false
+            this.handDisabled = false
+            this.handSubmitDisabled = true
+            this.$notification.success({
+              message: '保存成功',
+              description: '已经保存成功，下一步创建管理员'
+            })
+          }).catch(error => {
+            console.log(error)
+            this.loading = false
+          })
         }
       })
+    },
+    nextStep () {
+      this.$emit('nextStep')
     }
   }
 }

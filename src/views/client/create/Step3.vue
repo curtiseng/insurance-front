@@ -18,14 +18,15 @@
           v-decorator="['balance', { rules: [{required: true, message: '请输入预存金额'}] }]" />
       </a-form-item>
       <a-form-item :wrapperCol="{span: 19, offset: 5}">
-        <a-button :loading="loading" type="primary" @click="submit">提交</a-button>
-        <a-button type="primary" style="margin-left: 8px" @click="addInsurance">添加保险</a-button>
+        <a-button :loading="loading" type="primary" :disabled="handSubmitDisabled" @click="submit">提交</a-button>
+        <a-button type="primary" style="margin-left: 8px" :disabled="handDisabled" @click="finish">完成</a-button>
       </a-form-item>
     </a-form>
   </div>
 </template>
 
 <script>
+import { addClientBalance } from '@/api/client'
 export default {
   name: 'Step2',
   data () {
@@ -34,7 +35,9 @@ export default {
       wrapperCol: { lg: { span: 19 }, sm: { span: 19 } },
       form: this.$form.createForm(this),
       loading: false,
-      timer: 0
+      timer: 0,
+      handDisabled: true,
+      handSubmitDisabled: false
     }
   },
   methods: {
@@ -44,18 +47,26 @@ export default {
       that.loading = true
       validateFields((err, values) => {
         if (!err) {
-          console.log('表单 values', values)
-          // 下一步置灰
-          that.timer = setTimeout(function () {
-            that.loading = false
-          }, 1500)
-        } else {
-          that.loading = false
+          values.id = sessionStorage.getItem('clientId')
+          this.loading = true
+          addClientBalance(values).then(res => {
+            console.log(values)
+            this.handDisabled = false
+            this.handSubmitDisabled = true
+            this.loading = false
+            this.$notification.success({
+              message: '保存成功',
+              description: '已经保存成功，点击完成退出'
+            })
+          }).catch(error => {
+            console.log(error)
+            this.loading = false
+          })
         }
       })
     },
-    addInsurance () {
-      this.$router.push('/list/table-list')
+    finish () {
+      this.$emit('finish')
     }
   },
   beforeDestroy () {

@@ -7,45 +7,40 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['login', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['login', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
           label="姓名"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['username', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['username', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
           label="密码"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['password', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['password', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
           label="邮箱"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['email', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item :wrapperCol="{span: 19, offset: 5}">
-          <a-button :loading="loading" type="primary" @click="nextStep">提交</a-button>
-          <a-button style="margin-left: 8px" @click="prevStep">上一步</a-button>
+          <a-button :loading="loading" type="primary" :disabled="handSubmitDisabled" @click="handSubmit">提交</a-button>
+          <a-button style="margin-left: 8px" type="primary" :disabled="handDisabled" @click="nextStep">下一步</a-button>
         </a-form-item>
       </a-form>
     </a-spin>
-    <a-divider />
-    <div class="step-form-style-desc">
-      <h3>说明</h3>
-      <h4>点击下一步和提交</h4>
-      <p>点击下一步默认会提交</p>
-    </div>
   </div>
 </template>
 
 <script>
+import { addCompanyAdmin } from '@/api/admin'
 export default {
   name: 'Step1',
   data () {
@@ -60,21 +55,38 @@ export default {
       },
       visible: false,
       confirmLoading: false,
-      form: this.$form.createForm(this)
+      form: this.$form.createForm(this),
+      handDisabled: true,
+      handSubmitDisabled: false,
+      loading: false
     }
   },
   methods: {
-    nextStep () {
+    handSubmit () {
+      const client = { 'clientId': sessionStorage.getItem('clientId') }
+      console.log(client)
       const { form: { validateFields } } = this
       // 先校验，通过表单校验后，才进入下一步
       validateFields((err, values) => {
         if (!err) {
-          this.$emit('nextStep')
+          this.loading = true
+          addCompanyAdmin(values, client).then(res => {
+            this.handDisabled = false
+            this.handSubmitDisabled = true
+            this.loading = false
+            this.$notification.success({
+              message: '保存成功',
+              description: '已经保存成功，下一步增加预存额'
+            })
+          }).catch(error => {
+            console.log(error)
+            this.loading = false
+          })
         }
       })
     },
-    prevStep () {
-      this.$emit('prevStep')
+    nextStep () {
+      this.$emit('nextStep')
     }
   }
 }

@@ -22,25 +22,22 @@
               <a href="javascript:;">删除</a>
             </a-popconfirm>
             <a-divider type="vertical"/>
-            <a @click="onUpdate(record.id)" href="javascript:;">更新</a>
+            <a @click="importStaff(record.id)" href="javascript:;">导入员工</a>
             <a-divider type="vertical"/>
-            <a-dropdown>
-              <a-menu slot="overlay" @click="menuClick">
-                <a-menu-item :key="1"><a>导入员工</a></a-menu-item>
-                <a-menu-item :key="2"><a>修改密码</a></a-menu-item>
-                <a-menu-item :key="3"><a>增加余额</a></a-menu-item>
-              </a-menu>
-              <a>更多<a-icon type="down"/></a>
-            </a-dropdown>
+            <a @click="changePassword(record.id)" href="javascript:;">修改密码</a>
+            <a-divider type="vertical"/>
+            <a @click="$refs.addBalance.add(record.id)" href="javascript:;">增加余额</a>
           </template>
         </s-table>
       </a-row>
+      <add-balance ref="addBalance" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
 <script>
 import { getClients, deleteClient } from '@/api/client'
 import { STable } from '@/components'
+import AddBalance from './AddBalance'
 const columns = [{
   title: '公司名称',
   dataIndex: 'name'
@@ -82,7 +79,8 @@ const columns = [{
 }]
 export default {
   components: {
-    STable
+    STable,
+    AddBalance
   },
   data () {
     return {
@@ -105,15 +103,6 @@ export default {
         this.$refs.table.refresh()
       })
     },
-    onUpdate (rowKey) {
-      console.log('----------' + rowKey)
-    },
-    menuClick (values) {
-      console.log('----------' + values.item)
-      console.log('----------' + values.key)
-      console.log('----------' + values.keyPath)
-      console.log('----------' + values.domEvent)
-    },
     addClient () {
       this.$router.push({
         path: `/clinet/create`
@@ -121,6 +110,9 @@ export default {
     },
     handleOk () {
       this.$refs.table.refresh()
+    },
+    addBalance (rowKey) {
+
     }
   }
 }
