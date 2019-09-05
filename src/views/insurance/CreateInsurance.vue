@@ -50,7 +50,7 @@
           :wrapperCol="wrapperCol"
           :required="false"
         >
-          <a-select defaultValue="MOUTH">
+          <a-select defaultValue="MOUTH" @change="onPayMethodChange">
             <a-select-option value="MOUTH">按月计费</a-select-option>
             <a-select-option value="DAY">按天计费</a-select-option>
           </a-select>
@@ -90,6 +90,9 @@ export default {
       visible: false,
       confirmLoading: false,
       clientId: '0',
+      beginTime: '',
+      endTime: '',
+      paymentMethod: 'MOUTH',
       form: this.$form.createForm(this)
     }
   },
@@ -97,8 +100,8 @@ export default {
     add (clientId) {
       console.log(clientId)
       this.visible = true
-        if (clientId === '0') {
-          this.$notification['error']({
+      if (clientId === '0') {
+        this.$notification['error']({
           message: '错误',
           description: '请先选择客户',
           duration: 4
@@ -113,6 +116,9 @@ export default {
       validateFields((errors, values) => {
         if (!errors) {
           values.clientId = this.clientId
+          values.beginTime = this.beginTime
+          values.endTime = this.endTime
+          values.paymentMethod = this.paymentMethod
           console.log('values', values)
           addInsurance(values).then(res => {
             this.visible = false
@@ -132,9 +138,15 @@ export default {
     },
     onBeginChange (date, dateString) {
       console.log(date, dateString)
+      this.beginTime = dateString
     },
     onEndChange (date, dateString) {
       console.log(date, dateString)
+      this.endTime = dateString
+    },
+    onPayMethodChange (value) {
+      console.log(value)
+      this.paymentMethod = value
     }
   }
 }

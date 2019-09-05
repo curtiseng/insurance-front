@@ -10,32 +10,74 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item
-          label="登陆名"
+          label="货物名称"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['login', {rules: [{required: true, min: 5, max: 50, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['name', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="姓名"
+          label="运输方式"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['username', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['type', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="密码"
+          label="车牌号码"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['password', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['busNumber', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="邮箱"
+          label="货物标签或箱号"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['email', {rules: [{required: true, min: 5, message: '请输入至少五个字符的规则描述！'}]}]" />
+          <a-input v-decorator="['goodLabel', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="启运日期"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-date-picker @change="onChange" />
+        </a-form-item>
+        <a-form-item
+          label="始发地"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['beginPlace', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="收货地"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['endPlace', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="货物价值"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['balance', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="其他描述信息"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['description', {rules: [{required: true}]}]" />
+        </a-form-item>
+        <a-form-item
+          label="保险类型"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input v-decorator="['insuranceType', {rules: [{required: true}]}]" />
         </a-form-item>
       </a-form>
     </a-spin>
@@ -43,6 +85,7 @@
 </template>
 
 <script>
+import { addDistribution } from '@/api/distribution'
 export default {
   data () {
     return {
@@ -56,7 +99,7 @@ export default {
       },
       visible: false,
       confirmLoading: false,
-
+      beginTime: '',
       form: this.$form.createForm(this)
     }
   },
@@ -69,12 +112,16 @@ export default {
       this.confirmLoading = true
       validateFields((errors, values) => {
         if (!errors) {
+          values.beginTime = this.beginTime
           console.log('values', values)
-          setTimeout(() => {
+          addDistribution(values).then(res => {
             this.visible = false
             this.confirmLoading = false
-            this.$emit('ok', values)
-          }, 1500)
+            this.$emit('ok', res)
+          }).catch(error => {
+            console.log(error)
+            this.confirmLoading = false
+          })
         } else {
           this.confirmLoading = false
         }
@@ -82,6 +129,10 @@ export default {
     },
     handleCancel () {
       this.visible = false
+    },
+    onChange (date, dateString) {
+      console.log(date, dateString)
+      this.beginTime = dateString
     }
   }
 }

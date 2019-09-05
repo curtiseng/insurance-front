@@ -13,22 +13,8 @@
           :columns="columns"
           :data="loadData"
           showPagination="auto"
-          :alert="options.alert"
-          :rowSelection="options.rowSelection"
           bordered
         >
-          <template slot="name" slot-scope="text">
-            <a href="javascript:;">{{ text }}</a>
-          </template>
-          <template slot="operation" slot-scope="text, record">
-            <a-popconfirm
-              title="确定删除吗?"
-              @confirm="() => onDelete(record.key)">
-              <a href="javascript:;">删除</a>
-            </a-popconfirm>
-            <a-divider type="vertical"/>
-            <a href="javascript:;">更新</a>
-          </template>
         </s-table>
       </a-row>
       <create-distribution ref="createModal" @ok="handleOk"/>
@@ -36,22 +22,46 @@
   </div>
 </template>
 <script>
-import { getBackendAdmins } from '@/api/admin'
+import { getDistributions } from '@/api/distribution'
 import CreateDistribution from './CreateDistribution'
 import { STable } from '@/components'
 const columns = [{
-  title: '登录名',
-  dataIndex: 'login'
+  title: '货物名称',
+  dataIndex: 'name'
 }, {
-  title: '昵称',
-  dataIndex: 'username'
+  title: '运输方式',
+  dataIndex: 'type'
 }, {
-  title: '邮箱',
-  dataIndex: 'email'
-}, {
-  title: '操作',
-  dataIndex: 'operation',
-  scopedSlots: { customRender: 'operation' }
+  title: '车牌号码',
+  dataIndex: 'busNumber'
+},
+{
+  title: '货物标签或箱号',
+  dataIndex: 'goodLabel'
+},
+{
+  title: '启运日期',
+  dataIndex: 'beginTime'
+},
+{
+  title: '始发地',
+  dataIndex: 'beginPlace'
+},
+{
+  title: '收货地',
+  dataIndex: 'endPlace'
+},
+{
+  title: '货物价值',
+  dataIndex: 'balance'
+},
+{
+  title: '其他描述信息',
+  dataIndex: 'description'
+},
+{
+  title: '保险类型',
+  dataIndex: 'insuranceType'
 }]
 export default {
   components: {
@@ -65,54 +75,16 @@ export default {
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
-        return getBackendAdmins(Object.assign(parameter, this.queryParam))
+        return getDistributions(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })
-      },
-      selectedRowKeys: [],
-      selectedRows: [],
-      options: {
-        alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
-        rowSelection: {
-          selectedRowKeys: this.selectedRowKeys,
-          onChange: this.onSelectChange
-        }
-      },
-      optionAlertShow: true
+      }
     }
   },
   methods: {
     handleOk () {
       this.$refs.table.refresh()
-    },
-    tableOption () {
-      if (!this.optionAlertShow) {
-        this.options = {
-          alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
-          rowSelection: {
-            selectedRowKeys: this.selectedRowKeys,
-            onChange: this.onSelectChange,
-            getCheckboxProps: record => ({
-              props: {
-                disabled: record.no === 'No 2', // Column configuration not to be checked
-                name: record.no
-              }
-            })
-          }
-        }
-        this.optionAlertShow = true
-      } else {
-        this.options = {
-          alert: false,
-          rowSelection: null
-        }
-        this.optionAlertShow = false
-      }
-    },
-    onSelectChange (selectedRowKeys, selectedRows) {
-      this.selectedRowKeys = selectedRowKeys
-      this.selectedRows = selectedRows
     }
   }
 }

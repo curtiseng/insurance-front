@@ -56,23 +56,23 @@ const columns = [{
   title: '保险开始日期',
   dataIndex: 'beginTime'
 },
- {
+{
   title: '保险结束日期',
   dataIndex: 'endTime'
 },
- {
+{
   title: '保险金额',
   dataIndex: 'balance'
 },
- {
+{
   title: '保险结算方式',
   dataIndex: 'paymentMethod'
 },
- {
+{
   title: '货物保险费率',
   dataIndex: 'insuranceRate'
 },
- {
+{
   title: '保单号',
   dataIndex: 'insuranceNumber'
 }, {

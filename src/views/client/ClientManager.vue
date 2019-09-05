@@ -3,7 +3,7 @@
     <a-card :bordered="false">
       <a-row>
         <a-button type="primary" icon="plus" @click="addClient()">新建</a-button>
-        <a-button type="primary" icon="download" style="margin-left: 8px" @click="addClient()">下载导入模板</a-button>
+        <a-button type="primary" icon="download" style="margin-left: 8px" @click="downliadTemplate()">下载导入模板</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -23,7 +23,7 @@
               <a href="javascript:;">删除</a>
             </a-popconfirm>
             <a-divider type="vertical"/>
-            <a @click="importStaff(record.id)" href="javascript:;">导入员工</a>
+            <a @click="$refs.importStaff.add(record.id)" href="javascript:;">导入员工</a>
             <a-divider type="vertical"/>
             <a @click="$refs.changePassword.add(record.id)" href="javascript:;">修改密码</a>
             <a-divider type="vertical"/>
@@ -33,6 +33,7 @@
       </a-row>
       <add-balance ref="addBalance" @ok="handleOk"/>
       <change-password ref="changePassword" @ok="handleOk"/>
+      <import-staff ref="importStaff" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
@@ -41,6 +42,7 @@ import { getClients, deleteClient } from '@/api/client'
 import { STable } from '@/components'
 import AddBalance from './AddBalance'
 import ChangePassword from './ChangePassword'
+import ImportStaff from './ImportStaffModal'
 const columns = [{
   title: '公司名称',
   dataIndex: 'name'
@@ -84,7 +86,8 @@ export default {
   components: {
     STable,
     AddBalance,
-    ChangePassword
+    ChangePassword,
+    ImportStaff
   },
   data () {
     return {
@@ -114,6 +117,10 @@ export default {
     },
     handleOk () {
       this.$refs.table.refresh()
+    },
+    downliadTemplate () {
+      const path = window.location.host
+      window.open('http://' + path + '/api/staff/excel/template')
     }
   }
 }

@@ -1,16 +1,8 @@
 import { axios } from '@/utils/request'
 
 const api = {
-  staff: '/staff'
-}
-
-// 更新用户 // or (id, parameter)
-export function updateStaff (parameter) {
-  return axios({
-    url: api.staff, // or `${api.user}/${id}`
-    method: 'put',
-    data: parameter
-  })
+  staff: '/staff',
+  upload: '/staff/excel/import'
 }
 
 // 删除用户
@@ -46,5 +38,14 @@ export function addStaffWithClient (parameter) {
     method: 'post',
     data: parameter,
     params: parameter.clientId
+  })
+}
+
+export function uploadStaffs (parameter) {
+  return axios({
+    url: api.upload,
+    method: 'post',
+    data: parameter,
+    headers: { 'Content-Type': 'multipart/form-data' }
   })
 }

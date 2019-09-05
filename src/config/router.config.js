@@ -45,26 +45,26 @@ export const asyncRouterMap = [
         component: () => import('@/views/insurance/InsuranceManager'),
         meta: { title: '保险管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
       },
-      {
-        path: '/client/update',
-        name: 'updateClient',
-        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
-        component: () => import('@/views/client/UpdateClient'),
-        meta: { title: '信息修改', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN', 'ROLE_CADMIN' ] }
-      },
+      // {
+      //   path: '/client/update',
+      //   name: 'updateClient',
+      //   hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+      //   component: () => import('@/views/client/UpdateClient'),
+      //   meta: { title: '信息修改', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN', 'ROLE_CADMIN' ] }
+      // },
       {
         path: '/staff/manager/',
         name: 'staffManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/staff/StaffManager'),
-        meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN', 'ROLE_CADMIN' ] }
+        meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_CADMIN' ] }
       },
       {
         path: '/distribution/manager/',
         name: 'distributionManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/distribution/DistributionManager'),
-        meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN', 'ROLE_CADMIN' ] }
+        meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_CADMIN' ] }
       }
       // dashboard
       // {

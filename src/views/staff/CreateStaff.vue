@@ -29,7 +29,7 @@
           :wrapperCol="wrapperCol"
           :required="false"
         >
-          <a-select defaultValue="男">
+          <a-select defaultValue="男" @change="onSexChange">
             <a-select-option value="男">男</a-select-option>
             <a-select-option value="女">女</a-select-option>
           </a-select>
@@ -82,7 +82,8 @@ export default {
       },
       visible: false,
       confirmLoading: false,
-
+      startTime: '',
+      sex: '男',
       form: this.$form.createForm(this)
     }
   },
@@ -95,6 +96,8 @@ export default {
       this.confirmLoading = true
       validateFields((errors, values) => {
         if (!errors) {
+          values.startTime = this.startTime
+          values.sex = this.sex
           console.log('values', values)
           addStaff(values).then(res => {
             this.visible = false
@@ -114,6 +117,10 @@ export default {
     },
     onChange (date, dateString) {
       console.log(date, dateString)
+      this.startTime = dateString
+    },
+    onSexChange (value) {
+      this.sex = value
     }
   }
 }
