@@ -60,6 +60,13 @@ export const asyncRouterMap = [
         meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_CADMIN' ] }
       },
       {
+        path: '/nursing/manager/',
+        name: 'NursingManager',
+        hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
+        component: () => import('@/views/nursing/NursingManager'),
+        meta: { title: '养老机构管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_CADMIN' ] }
+      },
+      {
         path: '/distribution/manager/',
         name: 'distributionManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu

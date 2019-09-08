@@ -13,6 +13,7 @@
           rowKey="id"
           :columns="columns"
           :data="loadData"
+          :scroll="{ x: 2300 }"
           showPagination="auto"
           bordered
         >
@@ -44,8 +45,10 @@ import AddBalance from './AddBalance'
 import ChangePassword from './ChangePassword'
 import ImportStaff from './ImportStaffModal'
 const columns = [{
-  title: '公司名称',
-  dataIndex: 'name'
+  title: '被保险人',
+  dataIndex: 'name',
+  fixed: 'left',
+  width: 120
 }, {
   title: '联系电话',
   dataIndex: 'phoneNumber'
@@ -63,7 +66,7 @@ const columns = [{
   title: '余额',
   dataIndex: 'balance'
 }, {
-  title: '客户投保保险公司名称',
+  title: '保险公司名称',
   dataIndex: 'insuranceName'
 }, {
   title: '保险公司首选邮箱',
@@ -78,8 +81,13 @@ const columns = [{
   title: '项目经理邮箱',
   dataIndex: 'leaderEmail'
 }, {
+  title: '公共邮箱',
+  dataIndex: 'commonEmail'
+}, {
   title: '操作',
   dataIndex: 'operation',
+  fixed: 'right',
+  width: 200,
   scopedSlots: { customRender: 'operation' }
 }]
 export default {

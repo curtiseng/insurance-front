@@ -38,7 +38,7 @@
           <a-date-picker @change="onEndChange" />
         </a-form-item>
         <a-form-item
-          label="保险金额"
+          label="保费"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >

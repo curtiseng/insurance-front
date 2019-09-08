@@ -2,7 +2,7 @@
   <div>
     <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
       <a-form-item
-        label="公司名称"
+        label="被保险人"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
@@ -27,7 +27,7 @@
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['secondClientEmail', { rules: [{required: true}] }]"/>
+        <a-input v-decorator="['secondClientEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
         label="首期保费"
@@ -69,10 +69,10 @@
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['leaderEmail', { rules: [{required: true}] }]"/>
+        <a-input v-decorator="['leaderEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
-        label="项目经理邮箱"
+        label="公共邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >

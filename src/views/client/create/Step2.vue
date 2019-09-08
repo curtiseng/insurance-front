@@ -23,13 +23,6 @@
         >
           <a-input v-decorator="['password', {rules: [{required: true}]}]" />
         </a-form-item>
-        <a-form-item
-          label="邮箱"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['email', {rules: [{required: true}]}]" />
-        </a-form-item>
         <a-form-item :wrapperCol="{span: 19, offset: 5}">
           <a-button :loading="loading" type="primary" :disabled="handSubmitDisabled" @click="handSubmit">提交</a-button>
           <a-button style="margin-left: 8px" type="primary" :disabled="handDisabled" @click="nextStep">下一步</a-button>

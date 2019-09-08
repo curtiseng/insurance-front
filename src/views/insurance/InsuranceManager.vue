@@ -61,7 +61,7 @@ const columns = [{
   dataIndex: 'endTime'
 },
 {
-  title: '保险金额',
+  title: '保费',
   dataIndex: 'balance'
 },
 {
