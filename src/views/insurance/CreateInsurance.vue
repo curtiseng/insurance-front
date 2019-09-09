@@ -27,6 +27,7 @@
           label="保险开始日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
+          :required="true"
         >
           <a-date-picker @change="onBeginChange" />
         </a-form-item>
@@ -34,6 +35,7 @@
           label="保险结束日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
+          :required="true"
         >
           <a-date-picker @change="onEndChange" />
         </a-form-item>

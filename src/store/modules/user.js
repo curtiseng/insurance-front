@@ -67,8 +67,8 @@ const user = {
             reject(new Error('getInfo: roles must be a non-null array !'))
           }
 
-          commit('SET_NAME', { name: result.name, welcome: welcome() })
-          commit('SET_AVATAR', result.avatar)
+          commit('SET_NAME', { name: result.username, welcome: welcome() })
+          commit('SET_AVATAR', 'https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1567998719&di=6eff931baf29c7468f766e196d7f7f18&src=http://b-ssl.duitang.com/uploads/blog/201512/19/20151219212115_sxind.jpeg')
 
           resolve(response)
         }).catch(error => {

@@ -1,12 +1,24 @@
 <template>
   <div>
-    <a-form :form="form" style="max-width: 500px; margin: 40px auto 0;">
+    <a-form :form="form" style="max-width: 700px; margin: 60px auto 0;">
       <a-form-item
         label="被保险人"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
         <a-input v-decorator="['name', {rules: [{required: true}]}]" />
+      </a-form-item>
+      <a-form-item
+        label="被保险人类型"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+        :required="true"
+      >
+        <a-select mode="multiple" defaultValue="STAFF" @change="onTypeChange">
+          <a-select-option value="STAFF">员工申报</a-select-option>
+          <a-select-option value="DISTRIBUTION">物流申报</a-select-option>
+          <a-select-option value="NURSING">养老机构申报</a-select-option>
+        </a-select>
       </a-form-item>
       <a-form-item
         label="联系电话"
@@ -55,7 +67,7 @@
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['secondInsuranceEmail', { rules: [{required: true}] }]"/>
+        <a-input v-decorator="['secondInsuranceEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
         label="项目经理"
@@ -83,12 +95,6 @@
         <a-button style="margin-left: 8px" type="primary" :disabled="handDisabled" @click="nextStep">下一步</a-button>
       </a-form-item>
     </a-form>
-    <a-divider />
-    <div class="step-form-style-desc">
-      <h3>说明</h3>
-      <h4>初始金额</h4>
-      <p>如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。如果需要，这里可以放一些关于产品的常见问题说明。</p>
-    </div>
   </div>
 </template>
 
@@ -103,7 +109,8 @@ export default {
       form: this.$form.createForm(this),
       handDisabled: true,
       handSubmitDisabled: false,
-      loading: false
+      loading: false,
+      clientType: 'STAFF'
     }
   },
   methods: {
@@ -111,6 +118,7 @@ export default {
       const { form: { validateFields } } = this
       validateFields((err, values) => {
         if (!err) {
+          values.clientType = this.clientType
           this.loading = true
           addClient(values).then(res => {
             console.log(res.id)
@@ -131,6 +139,9 @@ export default {
     },
     nextStep () {
       this.$emit('nextStep')
+    },
+    onTypeChange (value) {
+      this.clientType = value
     }
   }
 }
