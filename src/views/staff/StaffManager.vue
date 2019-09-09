@@ -22,14 +22,10 @@
           </template>
           <template slot="operation" slot-scope="text, record">
             <a-popconfirm
-              title="确定删除吗?"
-              @confirm="() => onDelete(record.key)">
-              <a href="javascript:;">删除</a>
+              title="员工确定离职吗？"
+              @confirm="() => onDelete(record.id)">
+              <a href="javascript:;">离职</a>
             </a-popconfirm>
-            <a-divider type="vertical"/>
-            <a href="javascript:;">更新</a>
-            <a-divider type="vertical"/>
-            <a href="javascript:;">离职</a>
           </template>
         </s-table>
       </a-row>
@@ -38,7 +34,7 @@
   </div>
 </template>
 <script>
-import { getStaff } from '@/api/staff'
+import { getStaff, deleteStaff } from '@/api/staff'
 import CreateStaff from './CreateStaff'
 import { STable } from '@/components'
 const columns = [{
@@ -127,6 +123,12 @@ export default {
     onSelectChange (selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys
       this.selectedRows = selectedRows
+    },
+    onDelete (rowKey) {
+      console.log(rowKey)
+      deleteStaff(rowKey).then(res => {
+        this.$refs.table.refresh()
+      })
     }
   }
 }
