@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建保险"
+    title="新建人员保险"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"

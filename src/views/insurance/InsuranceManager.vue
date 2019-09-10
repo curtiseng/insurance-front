@@ -13,7 +13,7 @@
       <a-col :span="20">
         <a-card :bordered="true">
           <a-row>
-            <a-button type="primary" icon="plus" @click="clickAddStaff">新建员工保险</a-button>
+            <a-button type="primary" icon="plus" @click="clickAddStaff">新建人员保险</a-button>
             <a-button style="margin-left: 8px" type="primary" icon="plus" @click="clickAddDistri">新建物流保险</a-button>
           </a-row>
           <br/>
