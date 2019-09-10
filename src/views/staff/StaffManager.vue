@@ -53,7 +53,7 @@ const columns = [{
   title: '保险类型',
   dataIndex: 'insuranceType'
 }, {
-  title: '开始投保日期',
+  title: '保险生效日期',
   dataIndex: 'startTime'
 }, {
   title: '人员类型',

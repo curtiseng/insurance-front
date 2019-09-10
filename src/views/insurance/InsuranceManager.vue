@@ -13,7 +13,8 @@
       <a-col :span="20">
         <a-card :bordered="true">
           <a-row>
-            <a-button type="primary" icon="plus" @click="clickAdd">新建</a-button>
+            <a-button type="primary" icon="plus" @click="clickAddStaff">新建员工保险</a-button>
+            <a-button style="margin-left: 8px" type="primary" icon="plus" @click="clickAddDistri">新建物流保险</a-button>
           </a-row>
           <br/>
           <a-row>
@@ -35,7 +36,8 @@
               </template>
             </s-table>
           </a-row>
-          <create-insurance ref="createModal" @ok="handleOk"/>
+          <create-staff-insurance ref="createStaffModal" @ok="handleOk"/>
+          <create-distri-insurance ref="createDistriModal" @ok="handleOk"/>
         </a-card>
       </a-col>
     </a-card>
@@ -44,7 +46,8 @@
 <script>
 import { getInsuracnes, deleteInsurance } from '@/api/insurance'
 import { getAllClients } from '@/api/client'
-import CreateInsurance from './CreateInsurance'
+import CreateStaffInsurance from './CreateStaffInsurance'
+import CreateDistriInsurance from './CreateDistributionInsurance'
 import { STable } from '@/components'
 const columns = [{
   title: '保险险种',
@@ -70,7 +73,15 @@ const columns = [{
 },
 {
   title: '货物保险费率',
-  dataIndex: 'insuranceRate'
+  dataIndex: 'insuranceRate',
+  // customRender: (text) => {
+  //   if (text === 0) {
+  //     text = ''
+  //   } else {
+  //     text = text * 100 + '%'
+  //   }
+  // }
+  customRender: (text) => text * 100 + '%'
 },
 {
   title: '保单号',
@@ -88,7 +99,8 @@ const treeData = [
 ]
 export default {
   components: {
-    CreateInsurance,
+    CreateStaffInsurance,
+    CreateDistriInsurance,
     STable
   },
   data () {
@@ -140,8 +152,11 @@ export default {
       this.queryParam.clientId = rowKey[0]
       this.$refs.table.refresh()
     },
-    clickAdd () {
-      this.$refs.createModal.add(this.queryParam.clientId)
+    clickAddStaff () {
+      this.$refs.createStaffModal.add(this.queryParam.clientId)
+    },
+    clickAddDistri () {
+      this.$refs.createDistriModal.add(this.queryParam.clientId)
     }
   }
 }

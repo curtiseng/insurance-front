@@ -3,7 +3,9 @@ import { axios } from '@/utils/request'
 const api = {
   client: '/client',
   allClient: '/client/all',
-  clientBalance: '/client/balance'
+  clientBalance: '/client/balance',
+  workspace: '/workspace',
+  billing: '/billings'
 }
 
 // 列出客户
@@ -45,5 +47,20 @@ export function addClientBalance (parameter) {
     url: api.clientBalance,
     method: 'post',
     data: parameter
+  })
+}
+
+export function getWorkSpaceMap () {
+  return axios({
+    url: api.workspace,
+    method: 'get'
+  })
+}
+
+export function getBillings (parameter) {
+  return axios({
+    url: api.billing,
+    method: 'get',
+    params: parameter
   })
 }

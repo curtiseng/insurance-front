@@ -52,17 +52,10 @@
           :wrapperCol="wrapperCol"
           :required="false"
         >
-          <a-select defaultValue="MOUTH" @change="onPayMethodChange">
+          <a-select defaultValue="DAY" @change="onPayMethodChange">
             <a-select-option value="MOUTH">按月计费</a-select-option>
             <a-select-option value="DAY">按天计费</a-select-option>
           </a-select>
-        </a-form-item>
-        <a-form-item
-          label="货物保险费率"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['insuranceRate', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
           label="保单号"
@@ -94,7 +87,7 @@ export default {
       clientId: '0',
       beginTime: '',
       endTime: '',
-      paymentMethod: 'MOUTH',
+      paymentMethod: 'DAY',
       form: this.$form.createForm(this)
     }
   },
