@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建规则"
+    title="新建货物"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -21,10 +21,15 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['type', {rules: [{required: true}]}]" />
+          <a-select defaultValue="陆运" @change="onTypeChange">
+            <a-select-option value="陆运">陆运</a-select-option>
+            <a-select-option value="海运">海运</a-select-option>
+            <a-select-option value="空运">空运</a-select-option>
+            <a-select-option value="多式联运">多式联运</a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item
-          label="车牌号码"
+          label="运输工具编号/车牌号"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
@@ -59,7 +64,7 @@
           <a-input v-decorator="['endPlace', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="货物价值"
+          label="货物价值(万元)"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
@@ -100,6 +105,7 @@ export default {
       visible: false,
       confirmLoading: false,
       beginTime: '',
+      type: '陆运',
       form: this.$form.createForm(this)
     }
   },
@@ -111,9 +117,9 @@ export default {
       const { form: { validateFields } } = this
       this.confirmLoading = true
       validateFields((errors, values) => {
+        values.type = this.type
+        values.beginTime = this.beginTime
         if (!errors) {
-          values.beginTime = this.beginTime
-          console.log('values', values)
           addDistribution(values).then(res => {
             this.visible = false
             this.confirmLoading = false
@@ -133,6 +139,9 @@ export default {
     onChange (date, dateString) {
       console.log(date, dateString)
       this.beginTime = dateString
+    },
+    onTypeChange (value) {
+      this.type = value
     }
   }
 }

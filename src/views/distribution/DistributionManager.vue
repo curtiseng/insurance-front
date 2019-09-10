@@ -32,7 +32,7 @@ const columns = [{
   title: '运输方式',
   dataIndex: 'type'
 }, {
-  title: '车牌号码',
+  title: '运输工具编号/车牌号',
   dataIndex: 'busNumber'
 },
 {
@@ -52,7 +52,7 @@ const columns = [{
   dataIndex: 'endPlace'
 },
 {
-  title: '货物价值',
+  title: '货物价值(万元)',
   dataIndex: 'balance'
 },
 {
