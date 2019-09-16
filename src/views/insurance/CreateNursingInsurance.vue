@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建物流保险"
+    title="新建人员保险"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -40,18 +40,22 @@
           <a-date-picker @change="onEndChange" />
         </a-form-item>
         <a-form-item
-          label="保费(人年)"
+          label="保费"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
           <a-input v-decorator="['balance', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="货物保险费率"
+          label="保险结算方式"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
+          :required="false"
         >
-          <a-input v-decorator="['insuranceRate', {rules: [{required: true}]}]" />
+          <a-select defaultValue="DAY" @change="onPayMethodChange">
+            <a-select-option value="MOUTH">按月计费</a-select-option>
+            <a-select-option value="DAY">按天计费</a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item
           label="保单号"
@@ -83,6 +87,7 @@ export default {
       clientId: '0',
       beginTime: '',
       endTime: '',
+      paymentMethod: 'DAY',
       form: this.$form.createForm(this)
     }
   },
@@ -108,7 +113,7 @@ export default {
           values.clientId = this.clientId
           values.beginTime = this.beginTime
           values.endTime = this.endTime
-          values.insuranceRate = parseFloat(values.insuranceRate) / 100
+          values.paymentMethod = this.paymentMethod
           console.log('values', values)
           addInsurance(values).then(res => {
             this.visible = false

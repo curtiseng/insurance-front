@@ -9,7 +9,7 @@
         <a-input v-decorator="['name', {rules: [{required: true}]}]" />
       </a-form-item>
       <a-form-item
-        label="被保险人类型"
+        label="保险险种"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
         :required="true"
@@ -70,7 +70,7 @@
         <a-input v-decorator="['secondInsuranceEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
-        label="项目经理"
+        label="经济公司项目经理"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >

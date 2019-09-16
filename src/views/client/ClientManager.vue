@@ -75,7 +75,7 @@ const columns = [{
   title: '保险公司次选邮箱',
   dataIndex: 'secondInsuranceEmail'
 }, {
-  title: '客户项目经理',
+  title: '经济公司项目经理',
   dataIndex: 'leader'
 }, {
   title: '项目经理邮箱',
