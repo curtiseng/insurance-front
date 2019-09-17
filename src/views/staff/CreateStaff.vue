@@ -42,7 +42,7 @@
           <a-input v-decorator="['jobs', {rules: []}]" />
         </a-form-item>
         <a-form-item
-          label="保险类型"
+          label="保险方案"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
@@ -54,13 +54,6 @@
           :wrapperCol="wrapperCol"
         >
           <a-date-picker @change="onChange" />
-        </a-form-item>
-        <a-form-item
-          label="人员类型"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['staffType', {rules: []}]" />
         </a-form-item>
       </a-form>
     </a-spin>

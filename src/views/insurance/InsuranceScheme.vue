@@ -56,7 +56,7 @@ export default {
         width: '30%',
         scopedSlots: { customRender: 'balance' }
       }, {
-        title: 'operation',
+        title: '操作',
         dataIndex: 'operation',
         scopedSlots: { customRender: 'operation' }
       }]
@@ -90,7 +90,7 @@ export default {
       const newData = {
         key: count,
         scheme: '请填写方案描述',
-        balance: 1
+        balance: '0'
       }
       this.dataSource = [...dataSource, newData]
       this.count = count + 1

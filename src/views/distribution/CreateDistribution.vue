@@ -75,7 +75,7 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['description', {rules: [{required: true}]}]" />
+          <a-textarea v-decorator="['description', {rules: []}]" />
         </a-form-item>
         <a-form-item
           label="保险类型"
