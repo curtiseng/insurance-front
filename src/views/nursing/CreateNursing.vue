@@ -46,8 +46,8 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-select @change="onSexChange">
-            <a-select-option v-for="d in selectData" :key="d.value">{{ d.text + ':' + d.value }}</a-select-option>
+          <a-select @change="onSchemeChange">
+            <a-select-option v-for="d in selectData" :key="d.value">{{ d.text + ' : ' + d.value }}</a-select-option>
           </a-select>
         </a-form-item>
         <a-form-item
@@ -87,6 +87,9 @@ export default {
       confirmLoading: false,
       startTime: '',
       sex: '男',
+      staffType: 'NURSING',
+      insuranceScheme: '',
+      insuranceNumber: '',
       queryParam: {
         type: 'NURSING'
       },
@@ -96,6 +99,7 @@ export default {
   },
   created () {
     getInsuracneList(this.queryParam).then(res => {
+      this.insuranceNumber = res.insuranceNumber
       Object.keys(res.scheme).forEach(objKey => {
         const { selectData } = this
         const newData = {
@@ -117,6 +121,9 @@ export default {
         if (!errors) {
           values.startTime = this.startTime
           values.sex = this.sex
+          values.staffType = this.staffType
+          values.insuranceScheme = this.insuranceScheme
+          values.insuranceNumber = this.insuranceNumber
           console.log('values', values)
           addStaff(values).then(res => {
             this.visible = false
@@ -140,6 +147,9 @@ export default {
     },
     onSexChange (value) {
       this.sex = value
+    },
+    onSchemeChange (value) {
+      this.insuranceScheme = value
     }
   }
 }
