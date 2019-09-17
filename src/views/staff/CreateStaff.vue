@@ -46,7 +46,9 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['insuranceType', {rules: []}]" />
+          <a-select @change="onSexChange">
+            <a-select-option v-for="d in selectData" :key="d.value">{{ d.text + ':' + d.value }}</a-select-option>
+          </a-select>
         </a-form-item>
         <a-form-item
           label="开始投保日期"
@@ -62,6 +64,7 @@
 
 <script>
 import { addStaff } from '@/api/staff'
+import { getInsuracneList } from '@/api/insurance'
 export default {
   data () {
     return {
@@ -77,8 +80,24 @@ export default {
       confirmLoading: false,
       startTime: '',
       sex: '男',
+      queryParam: {
+        type: 'STAFF'
+      },
+      selectData: [],
       form: this.$form.createForm(this)
     }
+  },
+  created () {
+    getInsuracneList(this.queryParam).then(res => {
+      Object.keys(res.scheme).forEach(objKey => {
+        const { selectData } = this
+        const newData = {
+          text: objKey,
+          value: res.scheme[objKey].toString()
+        }
+        this.selectData = [...selectData, newData]
+      })
+    })
   },
   methods: {
     add () {

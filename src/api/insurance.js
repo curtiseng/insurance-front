@@ -1,13 +1,22 @@
 import { axios } from '@/utils/request'
 
 const api = {
-  insurance: '/insurance'
+  insurance: '/insurance',
+  list: '/insurance/list'
 }
 
 // 列出客户
 export function getInsuracnes (parameter) {
   return axios({
     url: api.insurance,
+    method: 'get',
+    params: parameter
+  })
+}
+
+export function getInsuracneList (parameter) {
+  return axios({
+    url: api.list,
     method: 'get',
     params: parameter
   })
