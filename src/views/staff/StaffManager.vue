@@ -50,14 +50,14 @@ const columns = [{
   title: '岗位',
   dataIndex: 'jobs'
 }, {
-  title: '保险类型',
-  dataIndex: 'insuranceType'
-}, {
   title: '保险生效日期',
   dataIndex: 'startTime'
 }, {
-  title: '人员类型',
-  dataIndex: 'staffType'
+  title: '保险方案',
+  dataIndex: 'insuranceScheme'
+}, {
+  title: '录入时间',
+  dataIndex: 'startTime'
 }, {
   title: '操作',
   dataIndex: 'operation',

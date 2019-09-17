@@ -35,13 +35,6 @@
           </a-select>
         </a-form-item>
         <a-form-item
-          label="岗位"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['jobs', {rules: []}]" />
-        </a-form-item>
-        <a-form-item
           label="保险类型"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
