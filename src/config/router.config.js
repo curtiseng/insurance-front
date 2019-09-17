@@ -23,7 +23,7 @@ export const asyncRouterMap = [
         name: 'adminManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/admin/AdminManager'),
-        meta: { title: '后勤管理员', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
+        meta: { title: '后勤管理', keepAlive: true, icon: 'user', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/clinet/create',
@@ -36,14 +36,14 @@ export const asyncRouterMap = [
         name: 'clientManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/client/ClientManager'),
-        meta: { title: '客户管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
+        meta: { title: '客户管理', keepAlive: true, icon: 'profile', permission: [ 'ROLE_BADMIN' ] }
       },
       {
         path: '/client/insurance',
         name: 'insuranceManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/insurance/InsuranceManager'),
-        meta: { title: '保险管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_BADMIN' ] }
+        meta: { title: '保险管理', keepAlive: true, icon: 'insurance', permission: [ 'ROLE_BADMIN' ] }
       },
       // {
       //   path: '/client/update',
@@ -57,21 +57,21 @@ export const asyncRouterMap = [
         name: 'staffManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/staff/StaffManager'),
-        meta: { title: '员工管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_STAFF' ] }
+        meta: { title: '员工管理', keepAlive: true, icon: 'idcard', permission: [ 'ROLE_STAFF' ] }
       },
       {
         path: '/nursing/manager/',
         name: 'NursingManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/nursing/NursingManager'),
-        meta: { title: '养老机构管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_NURSING' ] }
+        meta: { title: '养老机构管理', keepAlive: true, icon: 'smile', permission: [ 'ROLE_NURSING' ] }
       },
       {
         path: '/distribution/manager/',
         name: 'distributionManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/distribution/DistributionManager'),
-        meta: { title: '物流管理', keepAlive: true, icon: 'table', permission: [ 'ROLE_DISTRIBUTION' ] }
+        meta: { title: '物流管理', keepAlive: true, icon: 'build', permission: [ 'ROLE_DISTRIBUTION' ] }
       }
       // dashboard
       // {

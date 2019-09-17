@@ -19,7 +19,7 @@
             <br/>
             <a-row>
               <s-table
-                ref="table"
+                ref="staffTable"
                 size="default"
                 rowKey="id"
                 :columns="staffColumns"
@@ -46,7 +46,7 @@
             <br/>
             <a-row>
               <s-table
-                ref="table"
+                ref="nursingTable"
                 size="default"
                 rowKey="id"
                 :columns="nursingColumns"
@@ -73,7 +73,7 @@
             <br/>
             <a-row>
               <s-table
-                ref="table"
+                ref="distributionTable"
                 size="default"
                 rowKey="id"
                 :columns="distributionColumns"
@@ -94,9 +94,9 @@
         </a-tabs>
       </a-col>
     </a-card>
-    <create-staff-insurance ref="createStaffModal" @ok="handleOk"/>
-    <create-nursing-insurance ref="createNursingModal" @ok="handleOk"/>
-    <create-distri-insurance ref="createDistriModal" @ok="handleOk"/>
+    <create-staff-insurance ref="createStaffModal" @ok="handleStaffOk"/>
+    <create-nursing-insurance ref="createNursingModal" @ok="handleNursingOk"/>
+    <create-distri-insurance ref="createDistriModal" @ok="handleDistributionOk"/>
     <insurance-scheme ref="insuranceScheme" @ok="handleOk"/>
   </div>
 </template>
@@ -171,13 +171,6 @@ const distributionColumns = [{
 {
   title: '货物保险费率',
   dataIndex: 'insuranceRate',
-  // customRender: (text) => {
-  //   if (text === 0) {
-  //     text = ''
-  //   } else {
-  //     text = text * 100 + '%'
-  //   }
-  // }
   customRender: (text) => text * 100 + '%'
 },
 {
@@ -212,18 +205,21 @@ export default {
       },
       defaultSelectedKeys: [],
       loadStaffData: parameter => {
+        this.queryParam.type = 'STAFF'
         return getInsuracnes(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })
       },
       loadNursingData: parameter => {
+        this.queryParam.type = 'NURSING'
         return getInsuracnes(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
           })
       },
       loadDistributionData: parameter => {
+        this.queryParam.type = 'DISTRIBUTION'
         return getInsuracnes(Object.assign(parameter, this.queryParam))
           .then(res => {
             return res
@@ -236,13 +232,22 @@ export default {
     this.getClientTree()
   },
   methods: {
-    handleOk () {
-      this.$refs.table.refresh()
+    handOk () {},
+    handleStaffOk () {
+      this.$refs.staffTable.refresh()
+    },
+    handleNursingOk () {
+      this.$refs.nursingTable.refresh()
+    },
+    handleDistributionOk () {
+      this.$refs.distributionTable.refresh()
     },
     onDelete (rowKey) {
       console.log(rowKey)
       deleteInsurance(rowKey).then(res => {
-        this.$refs.table.refresh()
+        this.$refs.staffTable.refresh()
+        this.$refs.nursingTable.refresh()
+        this.$refs.distributionTable.refresh()
       })
     },
     getClientTree () {
@@ -263,7 +268,9 @@ export default {
     onSelect (rowKey) {
       console.log(rowKey)
       this.queryParam.clientId = rowKey[0]
-      this.$refs.table.refresh()
+      this.$refs.staffTable.refresh()
+      this.$refs.nursingTable.refresh()
+      this.$refs.distributionTable.refresh()
     },
     clickAddStaff () {
       this.$refs.createStaffModal.add(this.queryParam.clientId)
@@ -275,7 +282,9 @@ export default {
       this.$refs.createNursingModal.add(this.queryParam.clientId)
     },
     callback (key) {
-      this.$refs.table.refresh()
+      this.$refs.staffTable.refresh()
+      this.$refs.nursingTable.refresh()
+      this.$refs.distributionTable.refresh()
     }
   }
 }

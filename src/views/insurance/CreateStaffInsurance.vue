@@ -97,6 +97,7 @@ export default {
       validateFields((errors, values) => {
         if (!errors) {
           values.clientId = this.clientId
+          values.insuranceType = 'STAFF'
           values.beginTime = this.beginTime
           values.endTime = this.endTime
           values.paymentMethod = this.paymentMethod

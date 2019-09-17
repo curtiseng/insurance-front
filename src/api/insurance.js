@@ -13,6 +13,13 @@ export function getInsuracnes (parameter) {
   })
 }
 
+export function getInsuracneById (id) {
+  return axios({
+    url: `${api.insurance}/${id}`,
+    method: 'get'
+  })
+}
+
 // 删除用户
 export function deleteInsurance (id) {
   return axios({
@@ -26,6 +33,14 @@ export function addInsurance (parameter) {
   return axios({
     url: api.insurance,
     method: 'post',
+    data: parameter
+  })
+}
+
+export function updateInsurance (parameter) {
+  return axios({
+    url: api.insurance,
+    method: 'put',
     data: parameter
   })
 }

@@ -92,6 +92,7 @@ export default {
       validateFields((errors, values) => {
         if (!errors) {
           values.clientId = this.clientId
+          values.insuranceType = 'DISTRIBUTION'
           values.beginTime = this.beginTime
           values.endTime = this.endTime
           values.insuranceRate = parseFloat(values.insuranceRate) / 100

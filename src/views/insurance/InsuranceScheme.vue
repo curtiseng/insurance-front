@@ -31,6 +31,7 @@
 
 <script>
 import EditableCell from './EditableCell'
+import { getInsuracneById, updateInsurance } from '@/api/insurance'
 export default {
   components: {
     EditableCell
@@ -39,12 +40,10 @@ export default {
     return {
       visible: false,
       confirmLoading: false,
-      dataSource: [{
-        key: '0',
-        scheme: 'Edward King 0',
-        balance: '32'
-      }],
-      count: 1,
+      insuranceId: '',
+      scheme: {},
+      dataSource: [],
+      count: 0,
       columns: [{
         title: '方案',
         dataIndex: 'scheme',
@@ -65,10 +64,27 @@ export default {
   methods: {
     add (value) {
       console.log(value)
+      this.insuranceId = value
+      this.getScheme()
       this.visible = true
     },
     handleSubmit () {
-      console.log('submit')
+      this.dataSource.forEach(data => {
+        this.scheme[data.scheme] = data.balance
+      })
+      console.log(this.scheme)
+      var insurance = {}
+      insurance.id = this.insuranceId
+      insurance.scheme = this.scheme
+      this.confirmLoading = true
+      updateInsurance(insurance).then(res => {
+        this.confirmLoading = false
+        this.visible = false
+        this.$notification.success({
+          message: '保存成功',
+          description: '保险方案保存成功'
+        })
+      })
     },
     handleCancel () {
       this.visible = false
@@ -94,6 +110,22 @@ export default {
       }
       this.dataSource = [...dataSource, newData]
       this.count = count + 1
+    },
+    getScheme () {
+      this.dataSource = []
+      getInsuracneById(this.insuranceId).then(res => {
+        console.log(res.scheme)
+        Object.keys(res.scheme).forEach(objKey => {
+          const { count, dataSource } = this
+          const newData = {
+            key: count,
+            scheme: objKey,
+            balance: res.scheme[objKey].toString()
+          }
+          this.dataSource = [...dataSource, newData]
+          this.count = count + 1
+        })
+      })
     }
   }
 }
