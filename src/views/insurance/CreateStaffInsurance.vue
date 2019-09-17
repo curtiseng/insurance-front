@@ -17,13 +17,6 @@
           <a-input v-decorator="['name', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="保险唯一识别码"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['code', {rules: [{required: true}]}]" />
-        </a-form-item>
-        <a-form-item
           label="保险开始日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
@@ -38,13 +31,6 @@
           :required="true"
         >
           <a-date-picker @change="onEndChange" />
-        </a-form-item>
-        <a-form-item
-          label="保费"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['balance', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
           label="保险结算方式"

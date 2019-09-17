@@ -111,20 +111,14 @@ import { STable } from '@/components'
 const staffColumns = [{
   title: '保险险种',
   dataIndex: 'name'
-}, {
-  title: '保险唯一识别码',
-  dataIndex: 'code'
-}, {
+},
+{
   title: '保险开始日期',
   dataIndex: 'beginTime'
 },
 {
   title: '保险结束日期',
   dataIndex: 'endTime'
-},
-{
-  title: '保费(人年)',
-  dataIndex: 'balance'
 },
 {
   title: '保险结算方式',
@@ -141,20 +135,14 @@ const staffColumns = [{
 const nursingColumns = [{
   title: '保险险种',
   dataIndex: 'name'
-}, {
-  title: '保险唯一识别码',
-  dataIndex: 'code'
-}, {
+},
+{
   title: '保险开始日期',
   dataIndex: 'beginTime'
 },
 {
   title: '保险结束日期',
   dataIndex: 'endTime'
-},
-{
-  title: '保费(人年)',
-  dataIndex: 'balance'
 },
 {
   title: '保险结算方式',
@@ -171,10 +159,8 @@ const nursingColumns = [{
 const distributionColumns = [{
   title: '保险险种',
   dataIndex: 'name'
-}, {
-  title: '保险唯一识别码',
-  dataIndex: 'code'
-}, {
+},
+{
   title: '保险开始日期',
   dataIndex: 'beginTime'
 },
