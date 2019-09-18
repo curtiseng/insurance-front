@@ -57,14 +57,14 @@ export const asyncRouterMap = [
         name: 'staffManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/staff/StaffManager'),
-        meta: { title: '员工管理', keepAlive: true, icon: 'idcard', permission: [ 'ROLE_STAFF' ] }
+        meta: { title: '员工申报(雇主责任保险)', keepAlive: true, icon: 'idcard', permission: [ 'ROLE_STAFF' ] }
       },
       {
         path: '/nursing/manager/',
         name: 'NursingManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/nursing/NursingManager'),
-        meta: { title: '养老机构管理', keepAlive: true, icon: 'smile', permission: [ 'ROLE_NURSING' ] }
+        meta: { title: '老人申报(养老机构责任保险)', keepAlive: true, icon: 'smile', permission: [ 'ROLE_NURSING' ] }
       },
       {
         path: '/distribution/manager/',

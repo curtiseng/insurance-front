@@ -58,10 +58,6 @@ const columns = [{
 }, {
   title: '客户次选邮箱',
   dataIndex: 'secondClientEmail'
-},
-{
-  title: '首期保费',
-  dataIndex: 'initialMoney'
 }, {
   title: '余额',
   dataIndex: 'balance'
@@ -75,7 +71,7 @@ const columns = [{
   title: '保险公司次选邮箱',
   dataIndex: 'secondInsuranceEmail'
 }, {
-  title: '经济公司项目经理',
+  title: '经纪公司项目经理',
   dataIndex: 'leader'
 }, {
   title: '项目经理邮箱',

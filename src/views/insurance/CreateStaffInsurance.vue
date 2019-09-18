@@ -1,6 +1,6 @@
 <template>
   <a-modal
-    title="新建人员保险"
+    title="新建雇主责任保险(员工)"
     :width="640"
     :visible="visible"
     :confirmLoading="confirmLoading"
@@ -10,7 +10,7 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item
-          label="保险险种"
+          label="年度/险种名称"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
@@ -31,6 +31,13 @@
           :required="true"
         >
           <a-date-picker @change="onEndChange" />
+        </a-form-item>
+        <a-form-item
+          label="首期保费"
+          :labelCol="labelCol"
+          :wrapperCol="wrapperCol"
+        >
+          <a-input prefix="￥" v-decorator="['initialMoney', { rules: [{required: true}] }]"/>
         </a-form-item>
         <a-form-item
           label="保险结算方式"

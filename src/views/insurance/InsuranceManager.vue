@@ -14,7 +14,7 @@
         <a-tabs defaultActiveKey="1" @change="callback">
           <a-tab-pane tab="员工保险" key="1">
             <a-row>
-              <a-button type="primary" icon="plus" @click="clickAddStaff">新建人员保险</a-button>
+              <a-button type="primary" icon="plus" @click="clickAddStaff">新建雇主责任保险(员工)</a-button>
             </a-row>
             <br/>
             <a-row>
@@ -41,7 +41,7 @@
           </a-tab-pane>
           <a-tab-pane tab="养老保险" key="2">
             <a-row>
-              <a-button type="primary" icon="plus" @click="clickAddNursing">新建养老保险</a-button>
+              <a-button type="primary" icon="plus" @click="clickAddNursing">新建养老机构责任险保单</a-button>
             </a-row>
             <br/>
             <a-row>
@@ -109,7 +109,7 @@ import CreateNursingInsurance from './CreateNursingInsurance'
 import InsuranceScheme from './InsuranceScheme'
 import { STable } from '@/components'
 const staffColumns = [{
-  title: '保险险种',
+  title: '年度/险种名称',
   dataIndex: 'name'
 },
 {
@@ -119,6 +119,10 @@ const staffColumns = [{
 {
   title: '保险结束日期',
   dataIndex: 'endTime'
+},
+{
+  title: '首期保费',
+  dataIndex: 'initialMoney'
 },
 {
   title: '保险结算方式',
@@ -133,7 +137,7 @@ const staffColumns = [{
   scopedSlots: { customRender: 'operation' }
 }]
 const nursingColumns = [{
-  title: '保险险种',
+  title: '年度/险种名称',
   dataIndex: 'name'
 },
 {
@@ -143,6 +147,10 @@ const nursingColumns = [{
 {
   title: '保险结束日期',
   dataIndex: 'endTime'
+},
+{
+  title: '首期保费',
+  dataIndex: 'initialMoney'
 },
 {
   title: '保险结算方式',
@@ -157,7 +165,7 @@ const nursingColumns = [{
   scopedSlots: { customRender: 'operation' }
 }]
 const distributionColumns = [{
-  title: '保险险种',
+  title: '年度/险种名称',
   dataIndex: 'name'
 },
 {
@@ -169,7 +177,7 @@ const distributionColumns = [{
   dataIndex: 'endTime'
 },
 {
-  title: '货物保险费率',
+  title: '费率(%)',
   dataIndex: 'insuranceRate',
   customRender: (text) => text * 100 + '%'
 },

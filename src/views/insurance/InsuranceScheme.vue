@@ -64,11 +64,15 @@ export default {
   methods: {
     add (value) {
       console.log(value)
+      this.dataSource = []
+      this.scheme = {}
       this.insuranceId = value
       this.getScheme()
       this.visible = true
     },
     handleSubmit () {
+      this.dataSource = []
+      this.scheme = {}
       this.dataSource.forEach(data => {
         this.scheme[data.scheme] = data.balance
       })
@@ -87,6 +91,8 @@ export default {
       })
     },
     handleCancel () {
+      this.dataSource = []
+      this.scheme = {}
       this.visible = false
     },
     onCellChange (key, dataIndex, value) {
@@ -113,6 +119,7 @@ export default {
     },
     getScheme () {
       this.dataSource = []
+      this.scheme = {}
       getInsuracneById(this.insuranceId).then(res => {
         console.log(res.scheme)
         Object.keys(res.scheme).forEach(objKey => {

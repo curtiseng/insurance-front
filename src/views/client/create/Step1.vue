@@ -42,13 +42,6 @@
         <a-input v-decorator="['secondClientEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
-        label="首期保费"
-        :labelCol="labelCol"
-        :wrapperCol="wrapperCol"
-      >
-        <a-input prefix="￥" v-decorator="['initialMoney', { rules: [{required: true}] }]"/>
-      </a-form-item>
-      <a-form-item
         label="保险公司名称"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
@@ -70,7 +63,7 @@
         <a-input v-decorator="['secondInsuranceEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
-        label="经济公司项目经理"
+        label="经纪公司项目经理"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >

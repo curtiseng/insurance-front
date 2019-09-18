@@ -2,7 +2,7 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新建</a-button>
+        <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新增老人信息</a-button>
       </a-row>
       <br/>
       <a-row>

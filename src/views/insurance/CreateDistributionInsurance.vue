@@ -10,7 +10,7 @@
     <a-spin :spinning="confirmLoading">
       <a-form :form="form">
         <a-form-item
-          label="保险险种"
+          label="年度/险种名称"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
