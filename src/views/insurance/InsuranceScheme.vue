@@ -65,7 +65,6 @@ export default {
     add (value) {
       console.log(value)
       this.dataSource = []
-      this.scheme = {}
       this.insuranceId = value
       this.getScheme()
       this.visible = true
@@ -91,7 +90,6 @@ export default {
     },
     handleCancel () {
       this.dataSource = []
-      this.scheme = {}
       this.visible = false
     },
     onCellChange (key, dataIndex, value) {
