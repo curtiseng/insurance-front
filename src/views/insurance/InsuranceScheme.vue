@@ -71,7 +71,6 @@ export default {
       this.visible = true
     },
     handleSubmit () {
-      this.dataSource = []
       this.scheme = {}
       this.dataSource.forEach(data => {
         this.scheme[data.scheme] = data.balance
@@ -118,8 +117,6 @@ export default {
       this.count = count + 1
     },
     getScheme () {
-      this.dataSource = []
-      this.scheme = {}
       getInsuracneById(this.insuranceId).then(res => {
         console.log(res.scheme)
         Object.keys(res.scheme).forEach(objKey => {
