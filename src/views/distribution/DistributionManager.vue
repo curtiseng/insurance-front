@@ -25,6 +25,7 @@
 import { getDistributions } from '@/api/distribution'
 import CreateDistribution from './CreateDistribution'
 import { STable } from '@/components'
+import moment from 'moment'
 const columns = [{
   title: '货物名称',
   dataIndex: 'name'
@@ -41,7 +42,8 @@ const columns = [{
 },
 {
   title: '启运日期',
-  dataIndex: 'beginTime'
+  dataIndex: 'beginTime',
+  customRender: val => moment(val).format('YYYY-MM-DD')
 },
 {
   title: '始发地',
@@ -58,10 +60,6 @@ const columns = [{
 {
   title: '其他描述信息',
   dataIndex: 'description'
-},
-{
-  title: '保险类型',
-  dataIndex: 'insuranceType'
 }]
 export default {
   components: {

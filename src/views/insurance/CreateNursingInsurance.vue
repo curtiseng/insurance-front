@@ -17,7 +17,7 @@
           <a-input v-decorator="['name', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="保险开始日期"
+          label="保险生效日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           :required="true"

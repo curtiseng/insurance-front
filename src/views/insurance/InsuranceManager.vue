@@ -108,6 +108,7 @@ import CreateDistriInsurance from './CreateDistributionInsurance'
 import CreateNursingInsurance from './CreateNursingInsurance'
 import InsuranceScheme from './InsuranceScheme'
 import { STable } from '@/components'
+import moment from 'moment'
 const staffColumns = [{
   title: '年度/险种名称',
   dataIndex: 'name'
@@ -170,11 +171,13 @@ const distributionColumns = [{
 },
 {
   title: '保险开始日期',
-  dataIndex: 'beginTime'
+  dataIndex: 'beginTime',
+  customRender: val => moment(val).format('YYYY-MM-DD')
 },
 {
   title: '保险结束日期',
-  dataIndex: 'endTime'
+  dataIndex: 'endTime',
+  customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')
 },
 {
   title: '费率(%)',

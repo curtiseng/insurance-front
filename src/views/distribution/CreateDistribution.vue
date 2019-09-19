@@ -46,6 +46,7 @@
           label="启运日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
+          :required="true"
         >
           <a-date-picker @change="onChange" />
         </a-form-item>
@@ -76,13 +77,6 @@
           :wrapperCol="wrapperCol"
         >
           <a-textarea v-decorator="['description', {rules: []}]" />
-        </a-form-item>
-        <a-form-item
-          label="保险类型"
-          :labelCol="labelCol"
-          :wrapperCol="wrapperCol"
-        >
-          <a-input v-decorator="['insuranceType', {rules: [{required: true}]}]" />
         </a-form-item>
       </a-form>
     </a-spin>

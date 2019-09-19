@@ -41,6 +41,7 @@
 import { getStaff } from '@/api/staff'
 import CreateNursing from './CreateNursing'
 import { STable } from '@/components'
+import moment from 'moment'
 const columns = [{
   title: '姓名',
   dataIndex: 'name'
@@ -52,10 +53,12 @@ const columns = [{
   dataIndex: 'sex'
 }, {
   title: '保险生效日期',
-  dataIndex: 'startTime'
+  dataIndex: 'startTime',
+  customRender: val => moment(val).format('YYYY-MM-DD')
 }, {
   title: '录入时间',
-  dataIndex: 'startTime'
+  dataIndex: 'startTime',
+  customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')
 }, {
   title: '操作',
   dataIndex: 'operation',

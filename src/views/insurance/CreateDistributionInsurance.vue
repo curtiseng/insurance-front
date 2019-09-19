@@ -17,7 +17,7 @@
           <a-input v-decorator="['name', {rules: [{required: true}]}]" />
         </a-form-item>
         <a-form-item
-          label="保险开始日期"
+          label="保险生效日期"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
           :required="true"
@@ -33,7 +33,7 @@
           <a-date-picker @change="onEndChange" />
         </a-form-item>
         <a-form-item
-          label="货物保险费率"
+          label="费率(%)"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >

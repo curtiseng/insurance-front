@@ -71,7 +71,7 @@ export const asyncRouterMap = [
         name: 'distributionManager',
         hideChildrenInMenu: true, // 强制显示 MenuItem 而不是 SubMenu
         component: () => import('@/views/distribution/DistributionManager'),
-        meta: { title: '物流管理', keepAlive: true, icon: 'build', permission: [ 'ROLE_DISTRIBUTION' ] }
+        meta: { title: '物流申报', keepAlive: true, icon: 'build', permission: [ 'ROLE_DISTRIBUTION' ] }
       }
       // dashboard
       // {

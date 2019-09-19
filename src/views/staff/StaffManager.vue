@@ -37,6 +37,7 @@
 import { getStaff, deleteStaff } from '@/api/staff'
 import CreateStaff from './CreateStaff'
 import { STable } from '@/components'
+import moment from 'moment'
 const columns = [{
   title: '姓名',
   dataIndex: 'name'
@@ -51,13 +52,15 @@ const columns = [{
   dataIndex: 'jobs'
 }, {
   title: '保险生效日期',
-  dataIndex: 'startTime'
+  dataIndex: 'startTime',
+  customRender: val => moment(val).format('YYYY-MM-DD')
 }, {
   title: '保险方案',
   dataIndex: 'insuranceScheme'
 }, {
   title: '录入时间',
-  dataIndex: 'startTime'
+  dataIndex: 'startTime',
+  customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')
 }, {
   title: '操作',
   dataIndex: 'operation',
