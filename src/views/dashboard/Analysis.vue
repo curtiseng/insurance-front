@@ -12,6 +12,11 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="8" :style="{ marginBottom: '24px' }">
+        <chart-card :loading="loading" title="总老人数" :total="nursingCount | NumberFormat">
+          <template>今日增加<span> {{ currentDateNursing | NumberFormat }}</span></template>
+        </chart-card>
+      </a-col>
+      <a-col :sm="24" :md="12" :xl="8" :style="{ marginBottom: '24px' }">
         <chart-card :loading="loading" title="物流单数" :total="distributionCount | NumberFormat">
           <template>今日单数<span> {{ currentDateDistribution | NumberFormat }}</span></template>
         </chart-card>

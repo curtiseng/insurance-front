@@ -59,7 +59,7 @@ const columns = [{
   dataIndex: 'insuranceScheme'
 }, {
   title: '录入时间',
-  dataIndex: 'startTime',
+  dataIndex: 'createTime',
   customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')
 }, {
   title: '操作',
@@ -75,6 +75,7 @@ export default {
     return {
       columns,
       queryParam: {
+        staffType: 'STAFF'
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)

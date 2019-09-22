@@ -23,13 +23,9 @@
           <template slot="operation" slot-scope="text, record">
             <a-popconfirm
               title="确定删除吗?"
-              @confirm="() => onDelete(record.key)">
-              <a href="javascript:;">删除</a>
+              @confirm="() => onDelete(record.id)">
+              <a href="javascript:;">退床</a>
             </a-popconfirm>
-            <a-divider type="vertical"/>
-            <a href="javascript:;">更新</a>
-            <a-divider type="vertical"/>
-            <a href="javascript:;">离职</a>
           </template>
         </s-table>
       </a-row>
@@ -38,7 +34,7 @@
   </div>
 </template>
 <script>
-import { getStaff } from '@/api/staff'
+import { getStaff, deleteStaff } from '@/api/staff'
 import CreateNursing from './CreateNursing'
 import { STable } from '@/components'
 import moment from 'moment'
@@ -57,7 +53,7 @@ const columns = [{
   customRender: val => moment(val).format('YYYY-MM-DD')
 }, {
   title: '录入时间',
-  dataIndex: 'startTime',
+  dataIndex: 'createTime',
   customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')
 }, {
   title: '操作',
@@ -73,6 +69,7 @@ export default {
     return {
       columns,
       queryParam: {
+        staffType: 'NURSING'
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
@@ -124,6 +121,12 @@ export default {
     onSelectChange (selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys
       this.selectedRows = selectedRows
+    },
+    onDelete (rowKey) {
+      console.log(rowKey)
+      deleteStaff(rowKey).then(res => {
+        this.$refs.table.refresh()
+      })
     }
   }
 }
