@@ -48,7 +48,7 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-date-picker @change="onChange" />
+          <a-date-picker @change="onChange" :disabledDate="disabledDate" />
         </a-form-item>
       </a-form>
     </a-spin>
@@ -58,6 +58,7 @@
 <script>
 import { addStaff } from '@/api/staff'
 import { getInsuracneList } from '@/api/insurance'
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -101,7 +102,7 @@ export default {
       this.visible = true
     },
     handleSubmit () {
-      const { form: { validateFields } } = this
+      const { form: { validateFields, resetFields } } = this
       this.confirmLoading = true
       validateFields((errors, values) => {
         if (!errors) {
@@ -114,6 +115,11 @@ export default {
           addStaff(values).then(res => {
             this.visible = false
             this.confirmLoading = false
+            resetFields()
+            values.startTime = ''
+            values.staffType = this.staffType
+            values.insuranceScheme = ''
+            values.insuranceNumber = ''
             this.$emit('ok', res)
           }).catch(error => {
             console.log(error)
@@ -136,6 +142,10 @@ export default {
     },
     onSchemeChange (value) {
       this.insuranceScheme = value
+    },
+    disabledDate (current) {
+      // Can not select days before today and today
+      return current < moment().startOf('day')
     }
   }
 }

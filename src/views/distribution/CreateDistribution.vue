@@ -108,7 +108,7 @@ export default {
       this.visible = true
     },
     handleSubmit () {
-      const { form: { validateFields } } = this
+      const { form: { validateFields, resetFields } } = this
       this.confirmLoading = true
       validateFields((errors, values) => {
         values.type = this.type
@@ -117,6 +117,9 @@ export default {
           addDistribution(values).then(res => {
             this.visible = false
             this.confirmLoading = false
+            resetFields()
+            values.beginTime = ''
+            values.type = this.type
             this.$emit('ok', res)
           }).catch(error => {
             console.log(error)
