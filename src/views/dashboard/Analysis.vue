@@ -70,6 +70,7 @@ export default {
     return {
       columns,
       queryParam: {
+        sort: 'createTime,desc'
       },
       defaultSelectedKeys: [],
       loadData: parameter => {
