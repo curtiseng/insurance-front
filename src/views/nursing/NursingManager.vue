@@ -2,7 +2,13 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-button type="primary" icon="plus" @click="$refs.createModal.add()">新增老人信息</a-button>
+        <a-input-search
+          style="width: 200px"
+          placeholder="请输入姓名搜索"
+          @search="onSearch"
+          enterButton
+        />
+        <a-button style="margin-left: 16px" type="primary" icon="plus" @click="$refs.createModal.add()">新增老人信息</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -69,7 +75,8 @@ export default {
     return {
       columns,
       queryParam: {
-        staffType: 'NURSING'
+        staffType: 'NURSING',
+        name: ''
       },
       loadData: parameter => {
         console.log('loadData.parameter', parameter)
@@ -127,6 +134,10 @@ export default {
       deleteStaff(rowKey).then(res => {
         this.$refs.table.refresh()
       })
+    },
+    onSearch (value) {
+      this.queryParam.name = value
+      this.$refs.table.refresh()
     }
   }
 }
