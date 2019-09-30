@@ -35,6 +35,8 @@
                   </a-popconfirm>
                   <a-divider type="vertical"/>
                   <a @click="$refs.insuranceScheme.add(record.id)" href="javascript:;">保险方案</a>
+                  <a-divider type="vertical"/>
+                  <a @click="importStaff()" href="javascript:;">导入员工</a>
                 </template>
               </s-table>
             </a-row>
@@ -62,6 +64,8 @@
                   </a-popconfirm>
                   <a-divider type="vertical"/>
                   <a @click="$refs.insuranceScheme.add(record.id)" href="javascript:;">保险方案</a>
+                  <a-divider type="vertical"/>
+                  <a @click="importNursing('NURSING',)" href="javascript:;">导入老人</a>
                 </template>
               </s-table>
             </a-row>
@@ -98,6 +102,7 @@
     <create-nursing-insurance ref="createNursingModal" @ok="handleNursingOk"/>
     <create-distri-insurance ref="createDistriModal" @ok="handleDistributionOk"/>
     <insurance-scheme ref="insuranceScheme" @ok="handleOk"/>
+    <import-staff ref="importStaff" @ok="handleOk"/>
   </div>
 </template>
 <script>
@@ -108,6 +113,7 @@ import CreateDistriInsurance from './CreateDistributionInsurance'
 import CreateNursingInsurance from './CreateNursingInsurance'
 import InsuranceScheme from './InsuranceScheme'
 import { STable } from '@/components'
+import ImportStaff from './ImportStaffModal'
 import moment from 'moment'
 const staffColumns = [{
   title: '年度/险种名称',
@@ -204,7 +210,8 @@ export default {
     CreateDistriInsurance,
     CreateNursingInsurance,
     InsuranceScheme,
-    STable
+    STable,
+    ImportStaff
   },
   data () {
     return {
@@ -296,6 +303,12 @@ export default {
       this.$refs.staffTable.refresh()
       this.$refs.nursingTable.refresh()
       this.$refs.distributionTable.refresh()
+    },
+    importNursing () {
+      this.$refs.importStaff.add('NURSING', this.queryParam.clientId)
+    },
+    importStaff () {
+      this.$refs.importStaff.add('STAFF', this.queryParam.clientId)
     }
   }
 }
