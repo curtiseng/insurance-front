@@ -58,6 +58,13 @@ const columns = [{
   dataIndex: 'startTime',
   customRender: val => moment(val).format('YYYY-MM-DD')
 }, {
+  title: '保险方案',
+  dataIndex: 'insuranceScheme'
+}, {
+  title: '保费金额',
+  dataIndex: 'insuranceBalance'
+},
+{
   title: '录入时间',
   dataIndex: 'createTime',
   customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')

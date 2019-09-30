@@ -15,7 +15,7 @@
           <a-tab-pane tab="员工保险" key="1">
             <a-row>
               <a-button type="primary" icon="plus" @click="clickAddStaff">新建雇主责任保险(员工)</a-button>
-              <a-button type="primary" icon="download" style="margin-left: 8px" @click="downliadTemplate()">下载导入模板</a-button>              
+              <a-button type="primary" icon="download" style="margin-left: 8px" @click="downliadTemplate()">下载导入模板</a-button>
             </a-row>
             <br/>
             <a-row>
