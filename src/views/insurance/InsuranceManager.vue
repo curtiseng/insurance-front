@@ -15,6 +15,7 @@
           <a-tab-pane tab="员工保险" key="1">
             <a-row>
               <a-button type="primary" icon="plus" @click="clickAddStaff">新建雇主责任保险(员工)</a-button>
+              <a-button type="primary" icon="download" style="margin-left: 8px" @click="downliadTemplate()">下载导入模板</a-button>              
             </a-row>
             <br/>
             <a-row>
@@ -44,6 +45,7 @@
           <a-tab-pane tab="养老保险" key="2">
             <a-row>
               <a-button type="primary" icon="plus" @click="clickAddNursing">新建养老机构责任险保单</a-button>
+              <a-button type="primary" icon="download" style="margin-left: 8px" @click="downliadTemplate()">下载导入模板</a-button>
             </a-row>
             <br/>
             <a-row>
@@ -309,6 +311,10 @@ export default {
     },
     importStaff () {
       this.$refs.importStaff.add('STAFF', this.queryParam.clientId)
+    },
+    downliadTemplate () {
+      const path = window.location.host
+      window.open('http://' + path + '/api/staff/excel/template')
     }
   }
 }

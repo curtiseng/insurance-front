@@ -3,7 +3,6 @@
     <a-card :bordered="false">
       <a-row>
         <a-button type="primary" icon="plus" @click="addClient()">新建</a-button>
-        <a-button type="primary" icon="download" style="margin-left: 8px" @click="downliadTemplate()">下载导入模板</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -121,10 +120,6 @@ export default {
     },
     handleOk () {
       this.$refs.table.refresh()
-    },
-    downliadTemplate () {
-      const path = window.location.host
-      window.open('http://' + path + '/api/staff/excel/template')
     }
   }
 }
