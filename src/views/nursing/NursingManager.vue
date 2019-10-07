@@ -9,6 +9,8 @@
           enterButton
         />
         <a-button style="margin-left: 16px" type="primary" icon="plus" @click="$refs.createModal.add()">新增老人信息</a-button>
+        <a-button style="margin-left: 16px" type="primary" icon="mail" @click="createEmail()">提交新增老人信息</a-button>
+        <a-button style="margin-left: 16px" type="primary" icon="mail" @click="leaveEmail()">提交退床老人信息</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -40,7 +42,7 @@
   </div>
 </template>
 <script>
-import { getStaff, deleteStaff } from '@/api/staff'
+import { getStaff, deleteStaff, sendCreateEmail, sendLeaveEmail } from '@/api/staff'
 import CreateNursing from './CreateNursing'
 import { STable } from '@/components'
 import moment from 'moment'
@@ -145,6 +147,22 @@ export default {
     onSearch (value) {
       this.queryParam.name = value
       this.$refs.table.refresh()
+    },
+    createEmail () {
+      sendCreateEmail(this.queryParam).then(res => {
+        this.$notification.success({
+          message: '发送成功',
+          description: res
+        })
+      })
+    },
+    leaveEmail () {
+      sendLeaveEmail(this.queryParam).then(res => {
+        this.$notification.success({
+          message: '发送成功',
+          description: res
+        })
+      })
     }
   }
 }

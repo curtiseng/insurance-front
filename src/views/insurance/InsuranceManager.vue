@@ -185,7 +185,7 @@ const distributionColumns = [{
 {
   title: '保险结束日期',
   dataIndex: 'endTime',
-  customRender: val => moment(val).format('YYYY-MM-DD HH:mm:ss')
+  customRender: val => moment(val).format('YYYY-MM-DD')
 },
 {
   title: '费率(%)',

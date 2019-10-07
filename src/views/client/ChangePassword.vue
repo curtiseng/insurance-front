@@ -27,7 +27,6 @@
 <script>
 import { changeCompanyPassword } from '@/api/admin'
 export default {
-  name: 'Step2',
   data () {
     return {
       labelCol: {

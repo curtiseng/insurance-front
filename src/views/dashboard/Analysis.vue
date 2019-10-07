@@ -91,7 +91,9 @@ export default {
       currentDateAdd: '',
       currentDateDistribution: '',
       currentDateStaff: '',
-      staffCount: ''
+      staffCount: '',
+      currentDateNursing: '',
+      nursingCount: ''
     }
   },
   created () {
@@ -104,6 +106,8 @@ export default {
       this.currentDateDistribution = res.currentDateDistribution
       this.currentDateStaff = res.currentDateStaff
       this.staffCount = res.staffCount
+      this.nursingCount = res.nursingCount
+      this.currentDateNursing = res.currentDateNursing
       this.loading = false
     })
   },

@@ -23,7 +23,7 @@
               <a href="javascript:;">删除</a>
             </a-popconfirm>
             <a-divider type="vertical"/>
-            <a @click="$refs.importStaff.add(record.id)" href="javascript:;">导入员工</a>
+            <a @click="$refs.updateClient.update(record)" href="javascript:;">更新</a>
             <a-divider type="vertical"/>
             <a @click="$refs.changePassword.add(record.id)" href="javascript:;">修改密码</a>
             <a-divider type="vertical"/>
@@ -33,7 +33,7 @@
       </a-row>
       <add-balance ref="addBalance" @ok="handleOk"/>
       <change-password ref="changePassword" @ok="handleOk"/>
-      <import-staff ref="importStaff" @ok="handleOk"/>
+      <update-client ref="updateClient" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
@@ -42,7 +42,7 @@ import { getClients, deleteClient } from '@/api/client'
 import { STable } from '@/components'
 import AddBalance from './AddBalance'
 import ChangePassword from './ChangePassword'
-import ImportStaff from './ImportStaffModal'
+import UpdateClient from './UpdateClient'
 const columns = [{
   title: '被保险人',
   dataIndex: 'name',
@@ -90,7 +90,7 @@ export default {
     STable,
     AddBalance,
     ChangePassword,
-    ImportStaff
+    UpdateClient
   },
   data () {
     return {

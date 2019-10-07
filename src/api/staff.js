@@ -2,7 +2,9 @@ import { axios } from '@/utils/request'
 
 const api = {
   staff: '/staff',
-  upload: '/staff/excel/import'
+  upload: '/staff/excel/import',
+  createMail: '/staff/create/send',
+  leaveMail: '/staff/leave/send'
 }
 
 // 删除用户
@@ -47,5 +49,21 @@ export function uploadStaffs (parameter) {
     method: 'post',
     data: parameter,
     headers: { 'Content-Type': 'multipart/form-data' }
+  })
+}
+
+export function sendCreateEmail (parameter) {
+  return axios({
+    url: api.createMail,
+    method: 'get',
+    params: parameter
+  })
+}
+
+export function sendLeaveEmail (parameter) {
+  return axios({
+    url: api.leaveMail,
+    method: 'get',
+    params: parameter
   })
 }

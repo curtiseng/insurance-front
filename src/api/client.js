@@ -33,6 +33,13 @@ export function addClient (parameter) {
   })
 }
 
+export function updateClient (parameter) {
+  return axios({
+    url: api.client,
+    method: 'put',
+    data: parameter
+  })
+}
 // 删除客户
 export function deleteClient (parameter) {
   return axios({
