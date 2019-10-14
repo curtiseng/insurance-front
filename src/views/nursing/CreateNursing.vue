@@ -77,6 +77,7 @@ export default {
       staffType: 'NURSING',
       insuranceScheme: '',
       insuranceNumber: '',
+      insuranceEndtime: '',
       queryParam: {
         type: 'NURSING'
       },
@@ -87,6 +88,7 @@ export default {
   created () {
     getInsuracneList(this.queryParam).then(res => {
       this.insuranceNumber = res.insuranceNumber
+      this.insuranceEndtime = res.endTime
       Object.keys(res.scheme).forEach(objKey => {
         const { selectData } = this
         const newData = {
@@ -145,7 +147,7 @@ export default {
     },
     disabledDate (current) {
       // Can not select days before today and today
-      return current < moment().startOf('day')
+      return current < moment().startOf('day') || current.isAfter(this.insuranceEndtime)
     }
   }
 }
