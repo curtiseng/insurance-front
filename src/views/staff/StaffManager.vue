@@ -9,8 +9,6 @@
           enterButton
         />
         <a-button style="margin-left: 16px" type="primary" icon="plus" @click="$refs.createModal.add()">新增员工信息</a-button>
-        <a-button style="margin-left: 16px" type="primary" icon="mail" @click="createEmail()">提交新增员工信息</a-button>
-        <a-button style="margin-left: 16px" type="primary" icon="mail" @click="leaveEmail()">提交离职员工信息</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -42,7 +40,7 @@
   </div>
 </template>
 <script>
-import { getStaff, deleteStaff, sendCreateEmail, sendLeaveEmail } from '@/api/staff'
+import { getStaff, deleteStaff } from '@/api/staff'
 import CreateStaff from './CreateStaff'
 import { STable } from '@/components'
 import moment from 'moment'
@@ -67,7 +65,8 @@ const columns = [{
   dataIndex: 'insuranceScheme'
 }, {
   title: '保费金额',
-  dataIndex: 'insuranceBalance'
+  dataIndex: 'insuranceBalance',
+  customRender: (text) => '-' + text
 }, {
   title: '录入时间',
   dataIndex: 'createTime',
@@ -149,22 +148,6 @@ export default {
     onSearch (value) {
       this.queryParam.name = value
       this.$refs.table.refresh()
-    },
-    createEmail () {
-      sendCreateEmail(this.queryParam).then(res => {
-        this.$notification.success({
-          message: '发送成功',
-          description: res
-        })
-      })
-    },
-    leaveEmail () {
-      sendLeaveEmail(this.queryParam).then(res => {
-        this.$notification.success({
-          message: '发送成功',
-          description: res
-        })
-      })
     }
   }
 }
