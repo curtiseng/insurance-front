@@ -21,7 +21,7 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['idCard', {rules: [{required: true, whitespace:true, message: '身份证不能为空'}, {pattern: /^[1-9]\d{7}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}$|^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/, message: '身份证格式不对'}]}]" />
+          <a-input v-decorator="['idCard', {rules: [{required: true, whitespace:true, message: '身份证不能为空'}]}]" />
         </a-form-item>
         <a-form-item
           label="性别"

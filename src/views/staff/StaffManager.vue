@@ -65,8 +65,7 @@ const columns = [{
   dataIndex: 'insuranceScheme'
 }, {
   title: '保费金额',
-  dataIndex: 'insuranceBalance',
-  customRender: (text) => '-' + text
+  dataIndex: 'insuranceBalance'
 }, {
   title: '录入时间',
   dataIndex: 'createTime',
