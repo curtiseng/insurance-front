@@ -9,6 +9,7 @@
           enterButton
         />
         <a-button style="margin-left: 16px" type="primary" icon="plus" @click="$refs.createModal.add()">新增员工信息</a-button>
+        <a-button style="margin-left: 16px" type="primary" icon="download" @click="downloadStaff()">导出员工</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -147,6 +148,10 @@ export default {
     onSearch (value) {
       this.queryParam.name = value
       this.$refs.table.refresh()
+    },
+    downloadStaff () {
+      const path = window.location.host
+      window.open('http://' + path + '/api/staff/download/export?type=STAFF')
     }
   }
 }

@@ -9,6 +9,7 @@
           enterButton
         />
         <a-button style="margin-left: 16px" type="primary" icon="plus" @click="$refs.createModal.add()">新增老人信息</a-button>
+        <a-button style="margin-left: 16px" type="primary" icon="download" @click="downloadNursing()">导出老人</a-button>
       </a-row>
       <br/>
       <a-row>
@@ -145,6 +146,10 @@ export default {
     onSearch (value) {
       this.queryParam.name = value
       this.$refs.table.refresh()
+    },
+    downloadNursing () {
+      const path = window.location.host
+      window.open('http://' + path + '/api/staff/download/export?type=NURSING')
     }
   }
 }

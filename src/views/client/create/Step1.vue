@@ -63,6 +63,13 @@
         <a-input v-decorator="['secondInsuranceEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item
+        label="保险公司次选邮箱"
+        :labelCol="labelCol"
+        :wrapperCol="wrapperCol"
+      >
+        <a-input v-decorator="['thirdInsuranceEmail', { rules: [] }]"/>
+      </a-form-item>
+      <a-form-item
         label="经纪公司项目经理"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"

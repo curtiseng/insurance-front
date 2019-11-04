@@ -70,6 +70,9 @@ const columns = [{
   title: '保险公司次选邮箱',
   dataIndex: 'secondInsuranceEmail'
 }, {
+  title: '保险公司次选邮箱',
+  dataIndex: 'thirdInsuranceEmail'
+}, {
   title: '经纪公司项目经理',
   dataIndex: 'leader'
 }, {
