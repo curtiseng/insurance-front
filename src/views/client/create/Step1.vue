@@ -74,14 +74,14 @@
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['leaderEmail', { rules: [] }]"/>
+        <a-input v-decorator="['leaderEmail', { rules: [{required: true}] }]"/>
       </a-form-item>
       <a-form-item
         label="公共邮箱"
         :labelCol="labelCol"
         :wrapperCol="wrapperCol"
       >
-        <a-input v-decorator="['commonEmail', { rules: [{required: true}] }]"/>
+        <a-input v-decorator="['commonEmail', { rules: [] }]"/>
       </a-form-item>
       <a-form-item :wrapperCol="{span: 19, offset: 5}">
         <a-button :loading="loading" type="primary" :disabled="handSubmitDisabled" @click="handleSubmit">提交</a-button>

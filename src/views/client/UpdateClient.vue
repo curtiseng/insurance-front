@@ -70,14 +70,14 @@
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['leaderEmail', {initialValue: client.leaderEmail, rules: [] }]"/>
+          <a-input v-decorator="['leaderEmail', {initialValue: client.leaderEmail, rules: [{required: true}] }]"/>
         </a-form-item>
         <a-form-item
           label="公共邮箱"
           :labelCol="labelCol"
           :wrapperCol="wrapperCol"
         >
-          <a-input v-decorator="['commonEmail', {initialValue: client.commonEmail, rules: [{required: true}] }]"/>
+          <a-input v-decorator="['commonEmail', {initialValue: client.commonEmail, rules: [] }]"/>
         </a-form-item>
       </a-form>
     </a-spin>
