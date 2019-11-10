@@ -4,7 +4,8 @@ const api = {
   staff: '/staff',
   upload: '/staff/excel/import',
   createMail: '/staff/create/send',
-  leaveMail: '/staff/leave/send'
+  leaveMail: '/staff/leave/send',
+  batchDelete: '/staff/batch/delete'
 }
 
 // 删除用户
@@ -12,6 +13,14 @@ export function deleteStaff (id) {
   return axios({
     url: `${api.staff}/${id}`,
     method: 'delete'
+  })
+}
+
+export function batchDelete (ids) {
+  return axios({
+    url: api.batchDelete,
+    method: 'post',
+    data: ids
   })
 }
 

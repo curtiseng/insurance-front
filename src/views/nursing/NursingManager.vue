@@ -9,6 +9,7 @@
           enterButton
         />
         <a-button style="margin-left: 16px" type="primary" icon="plus" @click="$refs.createModal.add()">新增老人信息</a-button>
+        <a-button style="margin-left: 16px" type="primary" icon="delete" @click="batchDelete()">批量删除老人</a-button>
         <a-button style="margin-left: 16px" type="primary" icon="download" @click="downloadNursing()">导出老人</a-button>
       </a-row>
       <br/>
@@ -41,7 +42,7 @@
   </div>
 </template>
 <script>
-import { getStaff, deleteStaff } from '@/api/staff'
+import { getStaff, deleteStaff, batchDelete } from '@/api/staff'
 import CreateNursing from './CreateNursing'
 import { STable } from '@/components'
 import moment from 'moment'
@@ -140,6 +141,11 @@ export default {
     onDelete (rowKey) {
       console.log(rowKey)
       deleteStaff(rowKey).then(res => {
+        this.$refs.table.refresh()
+      })
+    },
+    batchDelete () {
+      batchDelete(this.selectedRowKeys).then(res => {
         this.$refs.table.refresh()
       })
     },
