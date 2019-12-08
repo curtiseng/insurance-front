@@ -72,6 +72,8 @@ export default {
     },
     handleCancel () {
       this.visible = false
+      this.fileList = []
+      this.handDownloadDisabled = true
     },
     handleRemove (file) {
       const index = this.fileList.indexOf(file)
@@ -86,6 +88,8 @@ export default {
     handleDownload () {
       console.log(this.errUrl)
       this.visible = false
+      this.fileList = []
+      this.handDownloadDisabled = true
       const path = window.location.host
       window.open('http://' + path + this.errUrl)
     }
