@@ -48,7 +48,7 @@
           :wrapperCol="wrapperCol"
           :required="true"
         >
-          <a-date-picker @change="onChange" />
+          <a-date-picker @change="onChange" :disabledDate="disabledDate"/>
         </a-form-item>
         <a-form-item
           label="始发地"
@@ -85,6 +85,7 @@
 
 <script>
 import { addDistribution } from '@/api/distribution'
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -139,6 +140,10 @@ export default {
     },
     onTypeChange (value) {
       this.type = value
+    },
+    disabledDate (current) {
+      // Can not select days before today and today
+      return current < moment().startOf('day')
     }
   }
 }
