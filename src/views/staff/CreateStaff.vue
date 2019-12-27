@@ -65,6 +65,7 @@
 <script>
 import { addStaff } from '@/api/staff'
 import { getInsuracneList } from '@/api/insurance'
+import moment from 'moment'
 export default {
   data () {
     return {
@@ -155,7 +156,7 @@ export default {
     },
     disabledDate (current) {
       // Can not select days before today and today
-      return current.isBefore(this.insuranceBeginTime) || current.isAfter(this.insuranceEndtime)
+      return current.isAfter(this.insuranceEndtime)
     }
   }
 }

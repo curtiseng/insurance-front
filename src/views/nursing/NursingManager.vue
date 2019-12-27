@@ -110,30 +110,6 @@ export default {
     handleOk () {
       this.$refs.table.refresh()
     },
-    tableOption () {
-      if (!this.optionAlertShow) {
-        this.options = {
-          alert: { show: true, clear: () => { this.selectedRowKeys = [] } },
-          rowSelection: {
-            selectedRowKeys: this.selectedRowKeys,
-            onChange: this.onSelectChange,
-            getCheckboxProps: record => ({
-              props: {
-                disabled: record.no === 'No 2', // Column configuration not to be checked
-                name: record.no
-              }
-            })
-          }
-        }
-        this.optionAlertShow = true
-      } else {
-        this.options = {
-          alert: false,
-          rowSelection: null
-        }
-        this.optionAlertShow = false
-      }
-    },
     onSelectChange (selectedRowKeys, selectedRows) {
       this.selectedRowKeys = selectedRowKeys
       this.selectedRows = selectedRows
@@ -146,6 +122,13 @@ export default {
     },
     batchDelete () {
       batchDelete(this.selectedRowKeys).then(res => {
+        this.$notification.success({
+          message: '删除成功',
+          description: `成功删除${this.selectedRowKeys.length}条数据`
+        })
+        this.selectedRowKeys = []
+        this.selectedRows = []
+        this.$refs.table.clearSelected()
         this.$refs.table.refresh()
       })
     },
