@@ -28,12 +28,15 @@
             <a @click="$refs.changePassword.add(record.id)" href="javascript:;">修改密码</a>
             <a-divider type="vertical"/>
             <a @click="$refs.addBalance.add(record.id)" href="javascript:;">增加余额</a>
+            <a-divider type="vertical"/>
+            <a @click="$refs.clientBilling.add(record.id)" href="javascript:;">账单</a>
           </template>
         </s-table>
       </a-row>
       <add-balance ref="addBalance" @ok="handleOk"/>
       <change-password ref="changePassword" @ok="handleOk"/>
       <update-client ref="updateClient" @ok="handleOk"/>
+      <client-billing ref="clientBilling" @ok="handleOk"/>
     </a-card>
   </div>
 </template>
@@ -43,6 +46,7 @@ import { STable } from '@/components'
 import AddBalance from './AddBalance'
 import ChangePassword from './ChangePassword'
 import UpdateClient from './UpdateClient'
+import ClientBilling from './ClientBilling'
 const columns = [{
   title: '被保险人',
   dataIndex: 'name',
@@ -93,7 +97,8 @@ export default {
     STable,
     AddBalance,
     ChangePassword,
-    UpdateClient
+    UpdateClient,
+    ClientBilling
   },
   data () {
     return {

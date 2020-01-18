@@ -5,7 +5,8 @@ const api = {
   allClient: '/client/all',
   clientBalance: '/client/balance',
   workspace: '/workspace',
-  billing: '/billings'
+  billing: '/billings',
+  clientBilling: '/client/billings'
 }
 
 // 列出客户
@@ -67,6 +68,14 @@ export function getWorkSpaceMap () {
 export function getBillings (parameter) {
   return axios({
     url: api.billing,
+    method: 'get',
+    params: parameter
+  })
+}
+
+export function getClientBillings (parameter) {
+  return axios({
+    url: api.clientBilling,
     method: 'get',
     params: parameter
   })
