@@ -7,7 +7,15 @@
     @ok="handleSubmit"
     @cancel="handleCancel"
   >
-    <s-table
+    <a-row>
+      <a-date-picker @change="onStartChange" placeholder="开始日期"/>
+      <a-date-picker style="margin-left: 16px" @change="onEndChange" placeholder="结束日期"/>
+      <a-button style="margin-left: 16px" type="primary" icon="plus" @click="search()">查询</a-button>
+      <a-button style="margin-left: 16px" type="primary" icon="plus" @click="downloadBilling()">导出</a-button>
+    </a-row>
+    <br/>
+    <a-row>
+      <s-table
         ref="table"
         size="default"
         rowKey="key"
@@ -17,6 +25,7 @@
         bordered
       >
       </s-table>
+    </a-row>
   </a-modal>
 </template>
 
@@ -67,21 +76,34 @@ export default {
     add (value) {
       this.visible = true
       this.client.id = value
+      this.queryParam.clientId = value
+    },
+    onStartChange (date, dateString) {
+      this.queryParam.beginDate = date.format('YYYY-MM-DD')
+    },
+    onEndChange (date, dateString) {
+      this.queryParam.endDate = date.format('YYYY-MM-DD')
+    },
+    search () {
+      this.$refs.table.refresh()
     },
     handleSubmit () {
-      this.confirmLoading = true
-      addClientBalance(values).then(res => {
-        this.visible = false
-        this.confirmLoading = false
-        this.$emit('ok', res)
-        }).catch(error => {
-        console.log(error)
-        this.confirmLoading = false
-        })
-      }
+      this.visible = false
     },
     handleCancel () {
       this.visible = false
+    },
+    downloadBilling () {
+      const path = window.location.host
+      var url = 'http://' + path + '/api/client/billings/download?clientId=' + this.queryParam.clientId
+      if (typeof (this.queryParam.beginDate) !== 'undefined') {
+        url += '&beginDate=' + this.queryParam.beginDate
+      }
+      if (typeof (this.queryParam.endDate) !== 'undefined') {
+        url += '&endDate=' + this.queryParam.endDate
+      }
+      window.open(url)
     }
+  }
 }
 </script>
