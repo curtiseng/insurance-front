@@ -39,6 +39,9 @@ const columns = [{
   title: '交易金额',
   dataIndex: 'balance'
 }, {
+  title: '保险单号',
+  dataIndex: 'insuranceNumber'
+}, {
   title: '交易流水号',
   dataIndex: 'paymentId'
 }]
