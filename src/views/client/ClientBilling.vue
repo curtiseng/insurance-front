@@ -42,6 +42,12 @@ const columns = [{
   title: '保险单号',
   dataIndex: 'insuranceNumber'
 }, {
+  title: '姓名',
+  dataIndex: 'name'
+}, {
+  title: '身份号码',
+  dataIndex: 'idCard'
+}, {
   title: '交易流水号',
   dataIndex: 'paymentId'
 }]
